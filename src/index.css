@@ -13,7 +13,9 @@
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html {
+html,
+body {
+  overflow-x: hidden !important;
   box-sizing: border-box;
   font-size: 16px;
   background: var(--light-gray);
@@ -2094,4 +2096,148 @@ footer.footer {
   height: 100px;
   margin-top: -40px;
   z-index: 0;
+}
+
+@media (max-width: 900px) {
+
+  .program-grid,
+  .mentor-grid,
+  .open-testimonial-list,
+  .grid-why {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+
+  .open-program-card,
+  .mentor-card,
+  .open-testimonial-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto 12px auto !important;
+  }
+
+  .open-section,
+  .about-section,
+  .programs-section-bg,
+  .why-section-bg {
+    padding: 18px 4px !important;
+  }
+
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 0 8px !important;
+  }
+
+  .open-section-title,
+  .about-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .program-grid,
+  .mentor-grid,
+  .open-testimonial-list,
+  .grid-why {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .open-program-card,
+  .mentor-card,
+  .open-testimonial-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto 8px auto !important;
+    padding: 12px 4px !important;
+  }
+
+  .open-section,
+  .about-section,
+  .programs-section-bg,
+  .why-section-bg {
+    padding: 8px 2px !important;
+  }
+
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 0 2px !important;
+  }
+
+  .open-section-title,
+  .about-title {
+    font-size: 1rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .frovexis-form input,
+  .frovexis-form select,
+  .form-container input,
+  .form-container select {
+    font-size: 0.95rem !important;
+    padding: 8px 4px !important;
+    height: 40px !important;
+  }
+
+  .frovexis-form-row {
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+
+  .frovexis-hero-form,
+  .form-container {
+    padding: 10px 2px 8px 2px !important;
+    border-radius: 10px !important;
+  }
+
+  .frovexis-hero-title,
+  .form-container h1 {
+    font-size: 1.1rem !important;
+    text-align: center !important;
+  }
+
+  .frovexis-hero-cta,
+  .form-container button {
+    font-size: 1rem !important;
+    padding: 12px 0 !important;
+    border-radius: 10px !important;
+  }
+}
+
+@media (min-width: 900px) {
+
+  .program-grid,
+  .mentor-grid,
+  .open-testimonial-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+    flex-direction: row !important;
+    gap: 32px !important;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .open-program-card,
+  .mentor-card,
+  .open-testimonial-card {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 24px 16px;
+  }
+
+  .open-section,
+  .about-section,
+  .programs-section-bg,
+  .why-section-bg {
+    padding: 32px 0 !important;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
