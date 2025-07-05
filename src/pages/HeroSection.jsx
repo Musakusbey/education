@@ -47,10 +47,10 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="frovexis-hero">
-      <div className="frovexis-hero-inner">
+    <section className="frovexis-hero" style={{ overflowX: "hidden" }}>
+      <div className="frovexis-hero-inner responsive-hero">
         {/* Sol: Görsel */}
-        <div className="frovexis-hero-visual">
+        <div className="frovexis-hero-visual responsive-hero-visual">
           <div className="frovexis-hero-bg"></div>
           <div className="frovexis-hero-illu">
             {/* SVG veya emoji ile yazılım temalı illüstrasyon */}
@@ -86,13 +86,16 @@ export default function HeroSection() {
           </div>
         </div>
         {/* Sağ: Form */}
-        <div className="frovexis-hero-form">
-          <h1 className="frovexis-hero-title anim-fade-slide">
+        <div className="frovexis-hero-form responsive-hero-form">
+          <h1 className="frovexis-hero-title responsive-hero-title anim-fade-slide">
             Frovexis'e Başvur – 2025 Yeni Dönem Eğitimleri Başladı!
           </h1>
           {!submitted ? (
-            <form className="frovexis-form" onSubmit={handleSubmit}>
-              <div className="frovexis-form-row">
+            <form
+              className="frovexis-form responsive-hero-form-inner"
+              onSubmit={handleSubmit}
+            >
+              <div className="frovexis-form-row responsive-hero-form-row">
                 <input
                   name="ad"
                   type="text"
@@ -117,6 +120,7 @@ export default function HeroSection() {
                 value={form.email}
                 onChange={handleChange}
                 required
+                className="responsive-hero-input"
               />
               <input
                 name="telefon"
@@ -125,12 +129,14 @@ export default function HeroSection() {
                 value={form.telefon}
                 onChange={handleChange}
                 required
+                className="responsive-hero-input"
               />
               <select
                 name="alan"
                 value={form.alan}
                 onChange={handleChange}
                 required
+                className="responsive-hero-input"
               >
                 <option value="">İlgi Alanı Seçin</option>
                 <option>Frontend</option>
@@ -139,7 +145,7 @@ export default function HeroSection() {
                 <option>Mobil</option>
                 <option>UI/UX</option>
               </select>
-              <div className="frovexis-form-checks">
+              <div className="frovexis-form-checks responsive-hero-checks">
                 <label>
                   <input
                     type="checkbox"
@@ -162,7 +168,7 @@ export default function HeroSection() {
                 </label>
               </div>
               <button
-                className="frovexis-hero-cta"
+                className="frovexis-hero-cta responsive-hero-cta"
                 type="submit"
                 disabled={loading}
               >
@@ -187,6 +193,82 @@ export default function HeroSection() {
           )}
         </div>
       </div>
+      <style>{`
+        .responsive-hero {
+          overflow-x: hidden;
+        }
+        @media (max-width: 900px) {
+          .responsive-hero {
+            padding: 8px 0 !important;
+          }
+          .responsive-hero-visual,
+          .responsive-hero-form {
+            min-width: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+          }
+          .responsive-hero-form {
+            padding: 12px 2px 8px 2px !important;
+            border-radius: 10px !important;
+            max-width: 100vw !important;
+          }
+          .responsive-hero-title {
+            font-size: 1.15rem !important;
+            margin-bottom: 10px !important;
+            text-align: center !important;
+          }
+          .responsive-hero-form-inner {
+            gap: 10px !important;
+          }
+          .responsive-hero-form-row {
+            flex-direction: column !important;
+            gap: 8px !important;
+          }
+          .responsive-hero-input {
+            font-size: 0.98rem !important;
+            padding: 10px 6px !important;
+            height: 38px !important;
+            width: 100% !important;
+            margin: 0 0 10px 0 !important;
+            box-sizing: border-box !important;
+            display: block !important;
+          }
+          .responsive-hero-cta {
+            font-size: 1rem !important;
+            padding: 10px 0 !important;
+            border-radius: 9px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+          }
+        }
+        @media (max-width: 700px) {
+          .responsive-hero {
+            padding: 4px 0 !important;
+          }
+          .responsive-hero-title {
+            font-size: 1rem !important;
+            margin-bottom: 7px !important;
+          }
+          .responsive-hero-form-inner {
+            gap: 7px !important;
+          }
+          .responsive-hero-form-row {
+            gap: 5px !important;
+          }
+          .responsive-hero-input {
+            font-size: 0.95rem !important;
+            padding: 7px 3px !important;
+            height: 34px !important;
+            margin: 0 0 8px 0 !important;
+          }
+          .responsive-hero-cta {
+            font-size: 0.97rem !important;
+            padding: 8px 0 !important;
+            border-radius: 8px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

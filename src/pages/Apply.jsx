@@ -126,6 +126,9 @@ export default function Apply() {
             background: linear-gradient(120deg, #ffe580, #ffc24e, #ffb300, #ffe580 90%);
             background-size: 200% 200%;
             animation: yellowMove 8s ease-in-out infinite alternate;
+            overflow-x: hidden;
+            width: 100vw;
+            box-sizing: border-box;
           }
           @keyframes yellowMove {
             0% {
@@ -145,6 +148,7 @@ export default function Apply() {
             box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
           }
           .form-container h1 {
             text-align: center;
@@ -166,6 +170,7 @@ export default function Apply() {
             font-family: 'Inter', sans-serif;
             background: #f9fafc;
             transition: border 0.2s;
+            box-sizing: border-box;
           }
           .form-container input:focus,
           .form-container select:focus {
@@ -186,6 +191,7 @@ export default function Apply() {
             transition: 0.2s;
             margin-top: 8px;
             box-shadow: 0 2px 8px rgba(251,140,0,0.08);
+            box-sizing: border-box;
           }
           .form-container button:hover {
             background: linear-gradient(to right, #FB8C00, #EF6C00);
@@ -199,14 +205,44 @@ export default function Apply() {
           }
           @media (max-width: 700px) {
             .apply-bg-animated {
-              padding: 8px;
+              padding: 8px 4px;
+              min-height: 100vh;
+              width: 100vw;
+              overflow-x: hidden;
             }
             .form-container {
-              padding: 18px 8px;
-              border-radius: 10px;
+              padding: 16px 12px;
+              border-radius: 12px;
+              margin: 0 4px;
+              width: calc(100% - 8px);
+              max-width: none;
             }
             .form-container h1 {
-              font-size: 1.2rem;
+              font-size: 1.4rem;
+              margin-bottom: 16px;
+            }
+            .form-container input,
+            .form-container select {
+              height: 44px;
+              padding: 0 10px;
+              margin-bottom: 12px;
+              font-size: 0.95rem;
+            }
+            .form-container button {
+              height: 44px;
+              font-size: 1rem;
+              margin-top: 4px;
+              width: 100%;
+              display: block;
+            }
+            .form-container .info-text {
+              font-size: 0.9rem;
+              margin: 24px 0;
+            }
+            html, body, #root {
+              overflow-x: hidden !important;
+              width: 100vw;
+              box-sizing: border-box;
             }
           }
         `}</style>
