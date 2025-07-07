@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
@@ -117,20 +117,8 @@ const programs = [
 
 export default function Programs() {
   const [open, setOpen] = useState([false, false, false]);
-  const [accordionMaxHeight, setAccordionMaxHeight] = useState(400);
 
-  useEffect(() => {
-    const max = Math.max(window.innerHeight - 180, 220);
-    setAccordionMaxHeight(max);
-    const handleResize = () => {
-      const max = Math.max(window.innerHeight - 180, 220);
-      setAccordionMaxHeight(max);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const toggle = idx => {
+  const handleToggle = idx => {
     setOpen(prev => {
       const copy = [...prev];
       copy[idx] = !copy[idx];
@@ -141,48 +129,106 @@ export default function Programs() {
   return (
     <>
       <Navbar />
-      <div className="programlar-bg">
-        <h1 className="programlar-title">Programlarımız</h1>
-        <div className="programlar-grid">
+      <section className="section">
+        <h2
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: 800,
+            color: "#212529",
+            marginBottom: 48,
+            textAlign: "center",
+          }}
+        >
+          Programlarımız
+        </h2>
+        <div className="cards-row">
           {programs.map((p, i) => (
-            <div className="programlar-card" key={i}>
-              <div className="programlar-icon">{p.icon}</div>
-              <div className="programlar-card-title">{p.title}</div>
-              <ul className="programlar-features">
-                {p.features.map((f, j) => (
-                  <li key={j}>{f}</li>
-                ))}
-              </ul>
-              <button className="programlar-btn" onClick={() => toggle(i)}>
-                {p.button}
-              </button>
-              <div
-                className={`programlar-accordion${open[i] ? " open" : ""}`}
-                style={{
-                  maxHeight: open[i] ? accordionMaxHeight : 0,
-                  transition: "max-height 0.5s cubic-bezier(.4,0,.2,1)",
-                  overflow: open[i] ? "auto" : "hidden",
-                  marginTop: open[i] ? 18 : 0,
-                  marginBottom: open[i] ? 8 : 0,
-                  background: "#fffbe6",
-                  borderRadius: 14,
-                  boxShadow: open[i] ? "0 4px 16px 0 #fbb03b22" : "none",
-                  padding: open[i] ? "18px 18px 12px 18px" : "0 18px",
-                  border: open[i] ? "1.5px solid #ffe580" : "none",
-                }}
-              >
+            <div
+              className="card"
+              key={i}
+              style={{
+                flex: 1,
+                maxWidth: 350,
+                minWidth: 260,
+                minHeight: 420,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    marginBottom: 16,
+                  }}
+                >
+                  <span style={{ fontSize: 32, color: "#ffc107" }}>
+                    {p.icon}
+                  </span>
+                  <span
+                    style={{ fontWeight: 700, fontSize: 22, color: "#212529" }}
+                  >
+                    {p.title}
+                  </span>
+                </div>
+                <ul
+                  style={{ color: "#212529", fontSize: 16, marginBottom: 12 }}
+                >
+                  {p.features.map((f, j) => (
+                    <li key={j}>{f}</li>
+                  ))}
+                </ul>
+              </div>
+              <div style={{ marginTop: "auto" }}>
+                <button
+                  style={{
+                    marginTop: 16,
+                    padding: "10px 24px",
+                    background: "#007bff",
+                    color: "#fff",
+                    borderRadius: 8,
+                    fontWeight: 600,
+                    border: "none",
+                    cursor: "pointer",
+                    width: "100%",
+                  }}
+                  onClick={() => handleToggle(i)}
+                >
+                  {p.button}
+                </button>
                 {open[i] && (
-                  <ul className="programlar-accordion-list">
-                    {p.details.map((d, k) => (
-                      <li key={k}>{d}</li>
-                    ))}
-                  </ul>
+                  <div
+                    style={{
+                      marginTop: 16,
+                      padding: 16,
+                      background: "#f5f9ff",
+                      border: "1px solid #e3eafc",
+                      borderRadius: 12,
+                    }}
+                  >
+                    <ul
+                      style={{
+                        color: "#212529",
+                        fontSize: 15,
+                        margin: 0,
+                        padding: 0,
+                        listStyle: "disc inside",
+                      }}
+                    >
+                      {p.details.map((d, k) => (
+                        <li key={k}>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

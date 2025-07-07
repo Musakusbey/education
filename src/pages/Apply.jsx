@@ -123,20 +123,10 @@ export default function Apply() {
         </form>
         <style>{`
           .apply-bg-animated {
-            background: linear-gradient(120deg, #ffe580, #ffc24e, #ffb300, #ffe580 90%);
-            background-size: 200% 200%;
-            animation: yellowMove 8s ease-in-out infinite alternate;
+            background: #fff;
             overflow-x: hidden;
             width: 100vw;
             box-sizing: border-box;
-          }
-          @keyframes yellowMove {
-            0% {
-              background-position: 0% 50%;
-            }
-            100% {
-              background-position: 100% 50%;
-            }
           }
           .form-container {
             max-width: 600px;

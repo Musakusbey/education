@@ -92,40 +92,7 @@ const advantageIcons = [
   "��", // Topluluk
 ];
 
-const programDetails = [
-  {
-    title: "Başlangıç",
-    details: [
-      "6 Ay Eğitim (Haftada 2 gün)",
-      "Front-End Temelleri: HTML, CSS, JS",
-      "Canlı Dersler ve Kayıtlar",
-      "Mentorluk: Haftalık Q&A",
-      "Staj İmkanı: 1 ay uzaktan staj",
-    ],
-  },
-  {
-    title: "Orta Seviye",
-    details: [
-      "8 Ay Eğitim (Haftada 2 gün)",
-      "React & Node.js, API, Proje Yönetimi",
-      "Gerçek Proje Geliştirme",
-      "Mentorluk: Birebir Kod İnceleme",
-      "Staj: 2 ay uzaktan staj",
-    ],
-  },
-  {
-    title: "İleri Seviye",
-    details: [
-      "12 Ay Eğitim (Haftada 2 gün)",
-      "Full-Stack: React, Node.js, DB, DevOps",
-      "Referans Mektubu ve CV Desteği",
-      "Mülakat Simülasyonu",
-      "Staj: 3 ay uzaktan staj",
-    ],
-  },
-];
-
-const programIcons = ["��", "🧑‍💻", "🚀"];
+const programIcons = ["", "🧑‍💻", "🚀"];
 
 function getPerPage() {
   if (window.innerWidth < 700) return 1;
@@ -136,7 +103,6 @@ function getPerPage() {
 export default function Home() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [perPage, setPerPage] = useState(getPerPage());
-  const [openAllPrograms, setOpenAllPrograms] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setPerPage(getPerPage());
@@ -169,52 +135,75 @@ export default function Home() {
       <HeroSection />
 
       {/* Programlar */}
-      <h2 className="open-section-title programs-title-standalone">
-        Programlarımız
-      </h2>
-      <div className="programs-section-bg">
-        <section className="open-section programs-section">
-          <div className="program-grid">
-            {programs.map((p, i) => (
-              <div className="open-program-card" key={i}>
-                <span className="open-program-icon">{programIcons[i]}</span>
-                <div className="open-program-title">{p.title}</div>
-                <div className="open-program-title-bar"></div>
-                <div className="open-program-desc">{p.desc}</div>
-                <ul className="open-program-features">
-                  {p.details.map((d, j) => (
-                    <li key={j}>
-                      <span className="feature-bulb">💡</span> {d}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className="open-program-btn details-button"
-                  onClick={() => setOpenAllPrograms(!openAllPrograms)}
+      <section className="section">
+        <h2
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: 800,
+            color: "#212529",
+            marginBottom: 48,
+            textAlign: "center",
+          }}
+        >
+          Programlarımız
+        </h2>
+        <div className="cards-row">
+          {programs.map((p, i) => (
+            <div
+              className="card"
+              key={i}
+              style={{
+                flex: 1,
+                maxWidth: 350,
+                minWidth: 260,
+                cursor: "pointer",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  marginBottom: 16,
+                }}
+              >
+                <span style={{ fontSize: 32, color: "#ffc107" }}>
+                  {programIcons[i]}
+                </span>
+                <span
+                  style={{ fontWeight: 700, fontSize: 22, color: "#212529" }}
                 >
-                  {openAllPrograms ? "Kapat" : "Detaylar"}
-                </button>
-                {openAllPrograms && (
-                  <div
-                    className="open-program-accordion open"
-                    style={{
-                      maxHeight: "400px",
-                      transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <ul className="open-program-details">
-                      {programDetails[i].details.map((d, j) => (
-                        <li key={j}>{d}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                  {p.title}
+                </span>
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
+              <div style={{ color: "#212529", fontSize: 16, marginBottom: 12 }}>
+                {p.desc}
+              </div>
+              <ul style={{ color: "#212529", fontSize: 16, marginBottom: 12 }}>
+                {p.details.map((d, j) => (
+                  <li key={j}>
+                    <span className="feature-bulb">💡</span> {d}
+                  </li>
+                ))}
+              </ul>
+              <button
+                style={{
+                  marginTop: 16,
+                  padding: "10px 24px",
+                  background: "#007bff",
+                  color: "#fff",
+                  borderRadius: 8,
+                  fontWeight: 600,
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {p.btn}
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
       <div className="wave-divider">
         <svg
           viewBox="0 0 1440 120"
@@ -235,79 +224,108 @@ export default function Home() {
           />
         </svg>
       </div>
-      <h2 className="open-section-title why-title-standalone">
-        Neden Frovexis?
-      </h2>
-      <div className="why-section-bg">
-        <section className="open-section open-why">
-          <div className="open-why-list grid-why">
-            {advantages.map((a, i) => (
-              <div className="open-why-item" key={i}>
-                <span className="open-why-icon">{advantageIcons[i]}</span>
-                <span className="open-why-text">{a}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-      <div className="wave-divider"></div>
-      <div className="wave-divider">
-        <svg
-          viewBox="0 0 1440 80"
-          width="100%"
-          height="80"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
+      {/* Neden Frovexis */}
+      <section className="section">
+        <h2
+          style={{
+            fontSize: "2.2rem",
+            fontWeight: 800,
+            color: "#212529",
+            marginBottom: 40,
+            textAlign: "center",
+          }}
         >
-          <defs>
-            <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#FFB74D" />
-              <stop offset="100%" stopColor="#fff" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,40 C360,120 1080,0 1440,60 L1440,80 L0,80 Z"
-            fill="url(#waveGradient)"
-          />
-        </svg>
-      </div>
-      <h2 className="open-section-title testimonials-title-standalone">
-        Katılımcılarımız ne diyor?
-      </h2>
-      <div className="testimonials-section-bg">
-        <section className="open-section open-testimonials">
-          <div className="open-testimonial-slider">
-            <button
-              className="open-testimonial-arrow left"
-              onClick={handlePrev}
-              aria-label="Önceki Yorum"
+          Neden Frovexis?
+        </h2>
+        <div className="cards-row">
+          {advantages.map((a, i) => (
+            <div
+              className="card"
+              key={i}
+              style={{
+                flex: 1,
+                maxWidth: 340,
+                minWidth: 200,
+                textAlign: "center",
+              }}
             >
-              &#8592;
-            </button>
-            <div className="open-testimonial-list no-scroll">
-              {visibleTestimonials.map((t, i) => (
-                <div className="open-testimonial-card active" key={i}>
-                  <img
-                    src={t.img}
-                    alt={t.name}
-                    className="open-testimonial-img"
-                  />
-                  <div className="open-testimonial-name">{t.name}</div>
-                  <div className="open-testimonial-job">{t.job}</div>
-                  <div className="open-testimonial-comment">{t.comment}</div>
-                </div>
-              ))}
+              <div style={{ fontSize: 36, color: "#007bff", marginBottom: 12 }}>
+                {advantageIcons[i]}
+              </div>
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 18,
+                  color: "#212529",
+                  marginBottom: 8,
+                }}
+              >
+                {a}
+              </div>
             </div>
-            <button
-              className="open-testimonial-arrow right"
-              onClick={handleNext}
-              aria-label="Sonraki Yorum"
+          ))}
+        </div>
+      </section>
+      {/* Katılımcı Yorumları */}
+      <section className="section">
+        <h2
+          style={{
+            fontSize: "2.2rem",
+            fontWeight: 800,
+            color: "#212529",
+            marginBottom: 40,
+            textAlign: "center",
+          }}
+        >
+          Katılımcılarımız ne diyor?
+        </h2>
+        <div className="cards-row">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <div
+              className="card"
+              key={i}
+              style={{
+                flex: 1,
+                maxWidth: 340,
+                minWidth: 220,
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              &#8594;
-            </button>
-          </div>
-        </section>
-      </div>
+              <img
+                src={t.img}
+                alt={t.name}
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  marginBottom: 16,
+                  border: "3px solid #f5f9ff",
+                }}
+              />
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: "#212529",
+                  marginBottom: 4,
+                }}
+              >
+                {t.name}
+              </div>
+              <div style={{ fontSize: 15, color: "#007bff", marginBottom: 8 }}>
+                {t.job}
+              </div>
+              <div style={{ fontSize: 15, color: "#212529", opacity: 0.85 }}>
+                {t.comment}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       <div className="wave-divider">
         <svg
           viewBox="0 0 1440 80"

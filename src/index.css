@@ -18,7 +18,7 @@ body {
   overflow-x: hidden !important;
   box-sizing: border-box;
   font-size: 16px;
-  background: var(--light-gray);
+  background: #f9f9f9;
   color: var(--text-dark);
 }
 
@@ -31,7 +31,7 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #ffe580;
+  background: #f9f9f9;
   color: var(--text-dark);
 }
 
@@ -380,10 +380,12 @@ body {
 /* Footer */
 .footer {
   width: 100%;
-  background: var(--main-blue);
+  background: #fff !important;
   color: var(--text-light);
   padding: 32px 0 24px 0;
   margin-top: 48px;
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .footer-inner {
@@ -394,6 +396,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  background: #fff !important;
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .footer-logo {
@@ -744,7 +749,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 64px 0 64px 0;
-  background: #ffe580;
+  background: #fff !important;
 }
 
 .about-title {
@@ -758,10 +763,6 @@ body {
 }
 
 .about-desc {
-  background: #ffe580;
-  border-radius: 32px;
-  border: 2px solid #fff;
-  box-shadow: 0 12px 36px 0 #20408022, 0 2px 8px 0 #fbb03b22;
   max-width: 640px;
   width: 100%;
   padding: 56px 40px 38px 40px;
@@ -901,7 +902,7 @@ body {
 }
 
 .open-program-card {
-  background: #f5f7fa;
+  background: #fff;
   border-radius: 18px;
   box-shadow: 0 4px 24px 0 rgba(24, 49, 83, 0.08);
   border: 2px solid #e4ecf7;
@@ -1432,13 +1433,8 @@ footer.footer {
 
 /* Modern ve profesyonel footer */
 .open-footer {
-  background: #ffc24e;
-  border-top: 1px solid #eeb13a;
-  padding: 0;
-  margin-top: 32px;
-  box-shadow: none;
-  border-radius: 0;
-  max-width: none;
+  background: #fff !important;
+  border-top: none !important;
 }
 
 .open-footer-inner {
@@ -1527,7 +1523,7 @@ footer.footer {
   color: #204080cc;
   padding: 12px 0 18px 0;
   margin-top: 18px;
-  border-top: 1px solid #eeb13a;
+  border-top: none;
   background: none;
 }
 
@@ -1842,7 +1838,7 @@ footer.footer {
 /* /programlar sayfası özel stilleri */
 .programlar-bg {
   min-height: 100vh;
-  background: #ffe580;
+  background: #f9f9f9;
   padding: 64px 0 64px 0;
   width: 100%;
 }
@@ -1960,7 +1956,7 @@ footer.footer {
   margin-top: 18px;
   margin-bottom: 8px;
   padding: 18px 18px 12px 18px;
-  border: 1.5px solid #ffe580;
+  border: 1.5px solid #f9f9f9;
   font-size: 1.01rem;
   color: #204080;
   font-family: 'Inter', sans-serif;
@@ -2052,8 +2048,8 @@ footer.footer {
 }
 
 .bizkimiz-section {
+  background: #fff !important;
   width: 100%;
-  background: #fce178;
   padding: 56px 0 64px 0;
   display: flex;
   flex-direction: column;
@@ -2358,4 +2354,146 @@ footer.footer {
     max-width: 1200px;
     margin: 0 auto;
   }
+}
+
+@media (max-width: 768px) {
+
+  /* Section ve container arası ferah boşluklar */
+  section,
+  .open-section,
+  .about-section,
+  .programs-section-bg,
+  .why-section-bg,
+  .testimonials-section-bg,
+  .hero-bg-yellow,
+  .programlar-bg,
+  .bizkimiz-section,
+  .frovexis-hero,
+  .apply-form-section,
+  .footer {
+    margin-top: 2.2rem !important;
+    margin-bottom: 2.2rem !important;
+    margin-block: 2.2rem !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    padding-inline: 0.7rem !important;
+  }
+
+  /* Kartlar ve kutular */
+  .open-program-card,
+  .mentor-card,
+  .open-testimonial-card,
+  .open-why-item,
+  .programlar-card,
+  .form-container,
+  .frovexis-hero-form,
+  .footer-inner {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    margin-block: 1.5rem !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    padding-inline: 0.7rem !important;
+  }
+
+  /* Kart içerikleri ve bloklar arası boşluklar */
+  .open-program-card>*,
+  .mentor-card>*,
+  .open-testimonial-card>*,
+  .open-why-item>*,
+  .programlar-card>*,
+  .form-container>*,
+  .frovexis-hero-form>* {
+    margin-bottom: 1.1rem !important;
+  }
+
+  /* Butonlar ve inputlar arası boşluk */
+  .form-container input,
+  .form-container select,
+  .form-container textarea,
+  .form-container button,
+  .frovexis-hero-form input,
+  .frovexis-hero-form select,
+  .frovexis-hero-form textarea,
+  .frovexis-hero-form button {
+    margin-bottom: 1.1rem !important;
+  }
+
+  /* Kartlar arası gap */
+  .programlar-grid,
+  .mentor-grid,
+  .open-testimonial-list,
+  .grid-why {
+    gap: 1.7rem !important;
+  }
+}
+
+.section {
+  background-color: #fff;
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto 64px auto;
+  border-radius: 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 48px 10px;
+  }
+
+  .cards-row {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 32px 4px;
+  }
+
+  .cards-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}
+
+.footer-section {
+  background: #fff !important;
+  padding: 48px 20px 24px 20px;
+  margin: 0;
+  border-radius: 0;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.horizon-divider {
+  background: #fff !important;
+}
+
+.wave-divider {
+  background: #fff !important;
+  display: none !important;
 }

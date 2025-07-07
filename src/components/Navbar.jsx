@@ -1,108 +1,109 @@
-import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
   return (
-    <nav className="navbar">
-      <div className="navbar-inner">
-        <a href="/" className="navbar-logo">
-          Frovexis
-        </a>
-        <button
-          className="navbar-hamburger"
-          aria-label="Menüyü Aç/Kapat"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span className={open ? "bar open" : "bar"}></span>
-          <span className={open ? "bar open" : "bar"}></span>
-          <span className={open ? "bar open" : "bar"}></span>
-        </button>
-        <div className={`navbar-menu${open ? " open" : ""}`}>
-          <a href="/programlar" onClick={() => setOpen(false)}>
-            Programlar
-          </a>
-          <a href="/hakkimizda" onClick={() => setOpen(false)}>
-            Hakkımızda
-          </a>
-          <a href="/basvuru" className="cta" onClick={() => setOpen(false)}>
-            Başvuru
-          </a>
+    <header className="navbar-oe2025">
+      <nav className="navbar-inner-oe2025">
+        <div className="navbar-logo-oe2025">
+          <Link to="/">Frovexis</Link>
         </div>
-      </div>
-      {open && (
-        <div className="navbar-backdrop" onClick={() => setOpen(false)}></div>
-      )}
+        <ul className="navbar-links-oe2025">
+          <li>
+            <Link to="/programlar">Programlar</Link>
+          </li>
+          <li>
+            <Link to="/hakkimizda">Hakkımızda</Link>
+          </li>
+        </ul>
+        <Link to="/basvuru" className="navbar-cta-oe2025">
+          Başvuru
+        </Link>
+      </nav>
       <style>{`
-        .navbar-hamburger {
-          display: none;
-          background: none;
-          border: none;
-          flex-direction: column;
-          gap: 5px;
-          cursor: pointer;
-          z-index: 40;
+        .navbar-oe2025 {
+          width: 100%;
+          background: linear-gradient(120deg, #f8fbff 0%, #eaf3ff 100%);
+          box-shadow: 0 2px 12px rgba(30, 60, 120, 0.04);
+          padding: 0;
+          margin: 0;
         }
-        .navbar-hamburger .bar {
-          width: 28px;
-          height: 3px;
-          background: #204080;
-          border-radius: 2px;
-          transition: 0.3s;
-          display: block;
+        .navbar-inner-oe2025 {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 64px;
+          padding: 0 24px;
         }
-        .navbar-hamburger .bar.open:nth-child(1) {
-          transform: translateY(8px) rotate(45deg);
+        .navbar-logo-oe2025 a {
+          font-size: 2rem;
+          font-weight: 800;
+          color: #1a2236;
+          text-decoration: none;
+          letter-spacing: 0.01em;
         }
-        .navbar-hamburger .bar.open:nth-child(2) {
-          opacity: 0;
+        .navbar-links-oe2025 {
+          display: flex;
+          gap: 32px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
         }
-        .navbar-hamburger .bar.open:nth-child(3) {
-          transform: translateY(-8px) rotate(-45deg);
+        .navbar-links-oe2025 li a {
+          color: #1a2236;
+          font-size: 1.08rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.18s;
+        }
+        .navbar-links-oe2025 li a:hover {
+          color: #1976d2;
+        }
+        .navbar-cta-oe2025 {
+          background: #1976d2;
+          color: #fff;
+          font-size: 1.08rem;
+          font-weight: 700;
+          padding: 10px 28px;
+          border-radius: 8px;
+          text-decoration: none;
+          box-shadow: 0 2px 8px rgba(30, 60, 120, 0.07);
+          transition: background 0.18s, color 0.18s;
+        }
+        .navbar-cta-oe2025:hover {
+          background: #1251a3;
+          color: #fff;
         }
         @media (max-width: 900px) {
-          .navbar-hamburger {
-            display: flex;
-            position: absolute;
-            right: 24px;
-            top: 18px;
+          .navbar-inner-oe2025 {
+            padding: 0 8px;
+            height: 56px;
           }
-          .navbar-menu {
-            position: absolute;
-            top: 68px;
-            right: 0;
-            left: 0;
-            background: #ffcd4f;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0;
-            padding: 18px 0 12px 0;
-            box-shadow: 0 8px 32px 0 #20408011;
-            z-index: 35;
-            display: none;
+          .navbar-logo-oe2025 a {
+            font-size: 1.4rem;
           }
-          .navbar-menu.open {
-            display: flex;
+          .navbar-links-oe2025 {
+            gap: 18px;
           }
-          .navbar-menu a {
-            width: 100%;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            border-radius: 0;
-            border-bottom: 1px solid #ffe580;
-          }
-          .navbar-menu a:last-child {
-            border-bottom: none;
+          .navbar-cta-oe2025 {
+            padding: 8px 18px;
+            font-size: 1rem;
           }
         }
-        .navbar-backdrop {
-          position: fixed;
-          inset: 0;
-          background: rgba(32, 64, 128, 0.12);
-          z-index: 30;
+        @media (max-width: 700px) {
+          .navbar-inner-oe2025 {
+            flex-direction: column;
+            height: auto;
+            gap: 8px;
+            padding: 8px 4vw;
+          }
+          .navbar-links-oe2025 {
+            gap: 12px;
+          }
         }
       `}</style>
-    </nav>
+    </header>
   );
 }
