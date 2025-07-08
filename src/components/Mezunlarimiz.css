@@ -1,0 +1,72 @@
+.mezunlar-section {
+    padding: 3rem 1rem;
+    background-color: #f9fafc;
+    text-align: center;
+}
+
+.mezunlar-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.mezun-kart {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    width: 260px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.mezun-kart:hover {
+    transform: scale(1.03);
+}
+
+.mezun-foto {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.unvan {
+    color: #204080;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.sirket-logo {
+    margin: 0.75rem auto;
+    height: 36px;
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.yorum {
+    font-size: 0.95rem;
+    color: #444;
+    margin-top: 0.5rem;
+}
+
+.alumni-avatar {
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    margin: 0 auto 8px;
+    display: block;
+}
+
+.company-logo {
+    width: 90px;
+    max-height: 40px;
+    object-fit: contain;
+    margin: 8px auto;
+    display: block;
+}

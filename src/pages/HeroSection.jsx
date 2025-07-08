@@ -1,50 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
-  const [form, setForm] = useState({
-    ad: "",
-    soyad: "",
-    email: "",
-    telefon: "",
-    alan: "",
-    kvkk: false,
-    onay: false,
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleChange = e => {
-    const { name, value, type, checked } = e.target;
-    setForm(f => ({ ...f, [name]: type === "checkbox" ? checked : value }));
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ad: form.ad,
-          soyad: form.soyad,
-          email: form.email,
-          telefon: form.telefon,
-          alan: form.alan,
-        }),
-      });
-      if (res.ok) {
-        setSubmitted(true);
-      } else {
-        setError("Bir hata oluştu, lütfen tekrar deneyin.");
-      }
-    } catch {
-      setError("Bağlantı hatası, lütfen tekrar deneyin.");
-    }
-    setLoading(false);
-  };
+  const navigate = useNavigate();
 
   return (
     <section className="hero-section-oe2025">
@@ -57,6 +15,10 @@ export default function HeroSection() {
           </h1>
           <p className="hero-desc-oe2025">
             Front-End'den Full-Stack'e, gerçek projelerle adım adım uzmanlaş!
+            <br />
+            <span style={{ fontWeight: 600, color: "#007bff" }}>
+              Hayalindeki yazılım kariyerine <u>şimdi</u> başla.
+            </span>
           </p>
           <ul className="hero-tik-list-oe2025">
             <li>
@@ -72,97 +34,78 @@ export default function HeroSection() {
             </li>
           </ul>
         </div>
-        {/* Sağ: Modern Form */}
-        <div className="hero-form-oe2025">
-          <div className="hero-form-title-oe2025">FORMU DOLDUR</div>
-          {!submitted ? (
-            <form className="hero-form-inner-oe2025" onSubmit={handleSubmit}>
-              <input
-                name="ad"
-                type="text"
-                placeholder="Ad *"
-                value={form.ad}
-                onChange={handleChange}
-                required
-              />
-              <input
-                name="soyad"
-                type="text"
-                placeholder="Soyad *"
-                value={form.soyad}
-                onChange={handleChange}
-                required
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="E-Posta *"
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                name="telefon"
-                type="tel"
-                placeholder="Telefon *"
-                value={form.telefon}
-                onChange={handleChange}
-                required
-              />
-              <select
-                name="alan"
-                value={form.alan}
-                onChange={handleChange}
-                required
-              >
-                <option value="">İlgi Alanı Seçin</option>
-                <option>Frontend</option>
-                <option>Backend</option>
-                <option>Fullstack</option>
-                <option>Mobil</option>
-                <option>UI/UX</option>
-              </select>
-              <div className="hero-form-checks-oe2025">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="kvkk"
-                    checked={form.kvkk}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span>
-                    {" "}
-                    Kişisel verilerimin işlenmesine, saklanmasına ve
-                    aktarılmasına ilişkin "Aydınlatma Metni"ni okudum, anladım.
-                  </span>
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="onay"
-                    checked={form.onay}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span> Başvuru koşullarını kabul ediyorum.</span>
-                </label>
-              </div>
-              <button
-                className="hero-form-cta-oe2025"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? "Gönderiliyor..." : "Başvur"}
-              </button>
-              <div className="hero-form-note-oe2025">* Zorunlu alan</div>
-              {error && <div className="hero-form-error-oe2025">{error}</div>}
-            </form>
-          ) : (
-            <div className="hero-form-success-oe2025">
-              Başvurunuz alındı. En kısa sürede sizinle iletişime geçeceğiz.
-            </div>
-          )}
+        {/* Sağ: Modern CTA ve Tanıtım Kutusu */}
+        <div
+          className="hero-form-oe2025"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minWidth: 320,
+            maxWidth: 400,
+            background: "#fff",
+            borderRadius: 18,
+            boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+            padding: "32px 24px",
+          }}
+        >
+          <div
+            className="hero-form-title-oe2025"
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: 700,
+              marginBottom: 12,
+              color: "#1a2236",
+            }}
+          >
+            Sana En Uygun Programı Bul!
+          </div>
+          <div
+            style={{
+              fontSize: "1.08rem",
+              color: "#444",
+              marginBottom: 18,
+              textAlign: "center",
+              lineHeight: 1.5,
+            }}
+          >
+            1 dakikada 3 soruluk mini quiz ile <b>yazılım yolculuğuna</b> en
+            uygun programı keşfet.
+            <br />
+            <span style={{ color: "#007bff", fontWeight: 600 }}>
+              Kariyerine güvenle başla!
+            </span>
+          </div>
+          <button
+            className="hero-cta-quiz-btn"
+            onClick={() => navigate("/basvuru")}
+            style={{
+              background: "linear-gradient(90deg,#FFA726,#FB8C00)",
+              color: "#fff",
+              fontWeight: 700,
+              fontSize: "1.13rem",
+              border: "none",
+              borderRadius: 8,
+              padding: "16px 32px",
+              marginTop: 8,
+              boxShadow: "0 2px 8px rgba(251,140,0,0.08)",
+              cursor: "pointer",
+              transition: "0.2s",
+            }}
+          >
+            Programını Bul &rarr;
+          </button>
+          <div
+            style={{
+              fontSize: "0.97rem",
+              color: "#888",
+              marginTop: 18,
+              textAlign: "center",
+            }}
+          >
+            Quiz sonunda sana özel program önerisi ve başvuru fırsatı!
+          </div>
         </div>
       </div>
       <style>{`
@@ -198,174 +141,32 @@ export default function HeroSection() {
           font-weight: 800;
           color: #1a2236;
           margin-bottom: 18px;
-          line-height: 1.13;
         }
         .hero-desc-oe2025 {
-          font-size: 1.15rem;
-          color: #2d3a4a;
-          margin-bottom: 22px;
-          font-weight: 500;
+          font-size: 1.18rem;
+          color: #2c3e50;
+          margin-bottom: 18px;
         }
         .hero-tik-list-oe2025 {
           list-style: none;
           padding: 0;
-          margin: 0;
-        }
-        .hero-tik-list-oe2025 li {
-          font-size: 1.05rem;
-          color: #2d3a4a;
-          margin-bottom: 12px;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 10px;
+          margin: 0 0 18px 0;
         }
         .tik-oe2025 {
-          color: #e53935;
-          font-size: 1.2em;
+          color: #43a047;
           font-weight: bold;
-          margin-right: 2px;
-        }
-        .hero-form-oe2025 {
-          flex: 0 0 370px;
-          background: #fff;
-          border-radius: 16px;
-          box-shadow: 0 2px 16px rgba(30, 60, 120, 0.07);
-          padding: 32px 28px 24px 28px;
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .hero-form-title-oe2025 {
-          color: #1976d2;
-          font-size: 1.25rem;
-          font-weight: 700;
-          text-align: center;
-          margin-bottom: 22px;
-          letter-spacing: 0.01em;
-        }
-        .hero-form-inner-oe2025 {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-        .hero-form-inner-oe2025 input,
-        .hero-form-inner-oe2025 select {
-          border: none;
-          border-bottom: 2px solid #e3e8ee;
-          border-radius: 0;
-          font-size: 1rem;
-          padding: 10px 4px 8px 0;
-          background: transparent;
-          margin-bottom: 2px;
-          transition: border-color 0.2s;
-        }
-        .hero-form-inner-oe2025 input:focus,
-        .hero-form-inner-oe2025 select:focus {
-          outline: none;
-          border-bottom: 2px solid #1976d2;
-        }
-        .hero-form-checks-oe2025 {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          margin-bottom: 2px;
-        }
-        .hero-form-checks-oe2025 label {
-          font-size: 0.92rem;
-          color: #4a5568;
-          display: flex;
-          align-items: flex-start;
-          gap: 7px;
-          font-weight: 400;
-        }
-        .hero-form-checks-oe2025 input[type="checkbox"] {
-          accent-color: #1976d2;
-          width: 16px;
-          height: 16px;
-          margin-top: 2px;
-        }
-        .hero-form-cta-oe2025 {
-          background: linear-gradient(90deg, #ff6b35 0%, #f7931e 100%);
-          color: #fff;
-          border: none;
-          padding: 14px 0;
-          border-radius: 8px;
-          font-size: 1.13rem;
-          font-weight: 700;
-          cursor: pointer;
-          margin-top: 8px;
-          margin-bottom: 2px;
-          transition: background 0.2s, transform 0.2s;
-        }
-        .hero-form-cta-oe2025:hover {
-          background: linear-gradient(90deg, #f7931e 0%, #ff6b35 100%);
-          transform: translateY(-2px);
-        }
-        .hero-form-cta-oe2025:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none;
-        }
-        .hero-form-note-oe2025 {
-          color: #8a99b3;
-          font-size: 0.88rem;
-          text-align: left;
-          margin-top: 2px;
-        }
-        .hero-form-error-oe2025 {
-          color: #e53935;
-          font-size: 0.95rem;
-          text-align: left;
-          margin-top: 4px;
-        }
-        .hero-form-success-oe2025 {
-          color: #1976d2;
-          font-size: 1.1rem;
-          text-align: center;
-          font-weight: 500;
+          margin-right: 8px;
         }
         @media (max-width: 900px) {
           .hero-inner-oe2025 {
-            gap: 24px;
-            padding: 36px 8px 24px 8px;
-          }
-          .hero-form-oe2025 {
-            flex: 0 0 320px;
-            padding: 22px 12px 18px 12px;
-          }
-        }
-        @media (max-width: 768px) {
-          .hero-inner-oe2025 {
             flex-direction: column;
-            gap: 32px;
-            padding: 32px 4vw 18px 4vw;
-          }
-          .hero-left-oe2025 {
-            max-width: 100%;
-            min-width: 0;
-            width: 100%;
-          }
-          .hero-title-oe2025 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-          }
-          .hero-desc-oe2025 {
-            font-size: 1rem;
-            margin-bottom: 14px;
-          }
-          .hero-tik-list-oe2025 li {
-            font-size: 0.98rem;
-            margin-bottom: 8px;
+            gap: 24px;
+            padding: 32px 4px 24px 4px;
           }
           .hero-form-oe2025 {
-            flex: none;
+            min-width: unset !important;
+            max-width: 98vw !important;
             width: 100%;
-            padding: 16px 4vw 12px 4vw;
-          }
-          .hero-form-title-oe2025 {
-            font-size: 1.1rem;
-            margin-bottom: 14px;
           }
         }
       `}</style>

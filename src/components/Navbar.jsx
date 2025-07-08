@@ -15,6 +15,9 @@ export default function Navbar() {
           <li>
             <Link to="/hakkimizda">Hakkımızda</Link>
           </li>
+          <li>
+            <Link to="/kampus">Kampüs</Link>
+          </li>
         </ul>
         <Link to="/basvuru" className="navbar-cta-oe2025">
           Başvuru

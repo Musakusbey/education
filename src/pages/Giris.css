@@ -1,0 +1,42 @@
+.giris-formu {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 24px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background: #fff;
+}
+
+.giris-formu input {
+    margin-bottom: 12px;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.giris-formu input:focus {
+    border: 1.5px solid #1e88e5;
+}
+
+.giris-formu button {
+    padding: 10px;
+    background: #1e88e5;
+    color: white;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.giris-formu button:hover {
+    background: #1565c0;
+}

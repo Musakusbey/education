@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "./HeroSection";
 import { FaWhatsapp } from "react-icons/fa";
+import ImpactStats from "../components/ImpactStats";
+import Mezunlarimiz from "../components/Mezunlarimiz";
+import LogoSlider from "../components/LogoSlider";
+import FAQSection from "../components/FAQSection";
+import Steps from "../components/Steps";
 
 const programs = [
   {
@@ -135,11 +140,33 @@ export default function Home() {
 
   return (
     <div>
-      {/* Navbar */}
       <Navbar />
       {/* Hero */}
       <HeroSection />
-
+      <ImpactStats />
+      <div
+        className="partner-section"
+        style={{
+          width: "100%",
+          margin: "0 auto",
+          background: "#fff",
+          padding: "0 0 2rem 0",
+        }}
+      >
+        <h2
+          className="partner-title"
+          style={{
+            textAlign: "center",
+            fontWeight: 700,
+            fontSize: "2rem",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Kurumsal Partnerlerimiz
+        </h2>
+        <LogoSlider />
+      </div>
+      <Mezunlarimiz />
       {/* Programlar */}
       <section className="section">
         <h2
@@ -173,7 +200,7 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
-                <p className="program-desc">{p.desc}</p>
+                <div className="program-desc">{p.desc}</div>
                 <ul className="program-list">
                   {p.details.slice(0, 4).map((d, k) => (
                     <li key={k} style={{ fontSize: 16 }}>
@@ -212,196 +239,186 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <style>{`
+      </section>
+      <style>{`
+        .programs-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 32px;
+          justify-content: center;
+          align-items: stretch;
+        }
+        .program-card {
+          background: #fff;
+          border-radius: 18px;
+          box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+          padding: 28px 24px 24px 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          max-width: 350px;
+          min-width: 260px;
+          min-height: 320px;
+          position: relative;
+          transition: box-shadow 0.2s;
+        }
+        .program-card:hover {
+          box-shadow: 0 12px 32px rgba(0,0,0,0.13);
+        }
+        .program-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+        .program-icon {
+          font-size: 32px;
+          color: #ffc107;
+        }
+        .program-title {
+          font-weight: 700;
+          font-size: 22px;
+          color: #212529;
+        }
+        .price-area {
+          background: #f9fafb;
+          border-radius: 12px;
+          padding: 18px 16px 12px 16px;
+          margin-bottom: 12px;
+          margin-top: 2px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+          width: 100%;
+          gap: 4px;
+        }
+        .price-row {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+          margin-bottom: 2px;
+        }
+        .card-price-old {
+          color: #e53935;
+          text-decoration: line-through;
+          font-weight: 500;
+          font-size: 15px;
+          margin-right: 2px;
+        }
+        .card-price-new {
+          color: #007bff;
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 0px;
+          letter-spacing: 0.5px;
+        }
+        .price-labels {
+          display: flex;
+          gap: 8px;
+          margin-top: 2px;
+        }
+        .discount-badge {
+          background: #FFFBEA;
+          color: #AA8000;
+          border-radius: 8px;
+          padding: 3px 8px;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.2px;
+          border: 1px solid #FFE6A0;
+        }
+        .installment-badge {
+          background: #4CAF50;
+          color: #fff;
+          border-radius: 8px;
+          padding: 3px 8px;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.2px;
+        }
+        .program-desc {
+          color: #212529;
+          font-size: 16px;
+          margin-bottom: 12px;
+        }
+        .program-list {
+          color: #212529;
+          font-size: 16px;
+          margin-bottom: 0;
+          padding-left: 18px;
+          list-style: disc inside;
+        }
+        .program-btn {
+          margin-top: 18px;
+          padding: 10px 24px;
+          background: #007bff;
+          color: #fff;
+          border-radius: 8px;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          width: 120px;
+          font-size: 16px;
+          align-self: flex-start;
+          transition: background 0.2s;
+        }
+        .program-btn:hover {
+          background: #0056b3;
+        }
+        .program-details {
+          margin-top: 18px;
+          background: #f5f9ff;
+          border: 1px solid #e3eafc;
+          border-radius: 12px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+          padding: 18px 16px;
+          width: 100%;
+          max-height: 320px;
+          overflow-y: auto;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          z-index: 10;
+        }
+        @media (max-width: 900px) {
           .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            justify-content: center;
-            align-items: stretch;
+            grid-template-columns: 1fr;
+            gap: 18px;
           }
           .program-card {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.07);
-            padding: 28px 24px 24px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            max-width: 350px;
-            min-width: 260px;
-            min-height: 320px;
-            position: relative;
-            transition: box-shadow 0.2s;
-          }
-          .program-card:hover {
-            box-shadow: 0 12px 32px rgba(0,0,0,0.13);
-          }
-          .program-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-          }
-          .program-icon {
-            font-size: 32px;
-            color: #ffc107;
-          }
-          .program-title {
-            font-weight: 700;
-            font-size: 22px;
-            color: #212529;
-          }
-          .program-desc {
-            color: #212529;
-            font-size: 16px;
-            margin-bottom: 12px;
-          }
-          .program-list {
-            color: #212529;
-            font-size: 16px;
-            margin-bottom: 0;
-            padding-left: 18px;
-            list-style: disc inside;
-          }
-          .program-btn {
-            margin-top: 18px;
-            padding: 10px 24px;
-            background: #007bff;
-            color: #fff;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            width: 120px;
-            font-size: 16px;
-            align-self: flex-start;
-            transition: background 0.2s;
-          }
-          .program-btn:hover {
-            background: #0056b3;
+            max-width: 98vw;
+            min-width: unset;
+            padding: 18px 6px;
           }
           .program-details {
-            margin-top: 18px;
-            background: #f5f9ff;
-            border: 1px solid #e3eafc;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 18px 16px;
+            position: static;
+            max-height: 400px;
+          }
+        }
+        @media (max-width: 600px) {
+          .program-card {
+            font-size: 1.13rem;
+            padding: 10px 2px;
+          }
+          .programs-grid {
+            gap: 10px;
+          }
+          .program-title {
+            font-size: 1.2rem;
+          }
+          .program-btn {
+            font-size: 1.08rem;
             width: 100%;
-            max-height: 320px;
-            overflow-y: auto;
-            position: absolute;
-            left: 0;
-            top: 100%;
-            z-index: 10;
           }
-          .price-area {
-            background: #FAFAFA;
-            border-radius: 12px;
-            padding: 10px 14px 8px 14px;
-            margin-bottom: 12px;
-            margin-top: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            width: 100%;
-            gap: 4px;
+          .program-details {
+            font-size: 1.01rem;
+            padding: 10px 4px;
           }
-          .price-row {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            margin-bottom: 2px;
-          }
-          .card-price-old {
-            color: #e53935;
-            text-decoration: line-through;
-            font-weight: 500;
-            font-size: 15px;
-            margin-right: 2px;
-          }
-          .card-price-new {
-            color: #007bff;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 0px;
-            letter-spacing: 0.5px;
-          }
-          .price-labels {
-            display: flex;
-            gap: 8px;
-            margin-top: 2px;
-          }
-          .discount-badge {
-            background: #FFFBEA;
-            color: #AA8000;
-            border-radius: 8px;
-            padding: 3px 8px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-            border: 1px solid #FFE6A0;
-          }
-          .installment-badge {
-            background: #4CAF50;
-            color: #fff;
-            border-radius: 8px;
-            padding: 3px 8px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-          }
-          @media (max-width: 900px) {
-            .programs-grid {
-              grid-template-columns: 1fr;
-              gap: 18px;
-            }
-            .program-card {
-              max-width: 98vw;
-              min-width: unset;
-              padding: 18px 6px;
-            }
-            .price-area {
-              padding: 8px 6px 6px 6px;
-            }
-            .card-price-new {
-              font-size: 20px;
-            }
-          }
-          @media (max-width: 600px) {
-            .program-card {
-              font-size: 1.13rem;
-              padding: 10px 2px;
-            }
-            .programs-grid {
-              gap: 10px;
-            }
-            .program-title {
-              font-size: 1.2rem;
-            }
-            .program-btn {
-              font-size: 1.08rem;
-              width: 100%;
-            }
-            .program-details {
-              font-size: 1.01rem;
-              padding: 10px 4px;
-            }
-            .price-area {
-              padding: 7px 2px 5px 2px;
-            }
-            .card-price-new {
-              font-size: 1.13rem;
-            }
-            .discount-badge, .installment-badge {
-              font-size: 12px;
-              padding: 2px 6px;
-            }
-          }
-        `}</style>
-      </section>
+        }
+      `}</style>
+      <Steps />
+      <FAQSection />
       <div className="wave-divider">
         <svg
           viewBox="0 0 1440 120"
