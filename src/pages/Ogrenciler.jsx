@@ -2,6 +2,7 @@ import OdevTeslim from "./OdevTeslim";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import QuizAlani from "../components/QuizAlani";
 
 // Kampüs paneline özel stiller
 const panelCss = `
@@ -84,22 +85,85 @@ if (
 }
 
 function OdevTeslimKarti() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", fullName);
+    formData.append("email", email);
+    formData.append("title", subject);
+    formData.append("message", message);
+    formData.append("file", selectedFile);
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/api/odev-gonder", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        alert("Gönderildi! ✅");
+        setFullName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+        setSelectedFile(null);
+      } else {
+        alert("Bir hata oluştu ❌");
+      }
+    } catch (error) {
+      console.error("Hata:", error);
+      alert("Sunucuya ulaşılamadı.");
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="card">
       <h2>📥 Ödev Teslim Formu</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" placeholder="Ad Soyad" required />
-          <input type="email" placeholder="E-posta adresi" required />
-          <input type="text" placeholder="Ödev Başlığı" required />
+          <input
+            type="text"
+            placeholder="Ad Soyad"
+            required
+            value={fullName}
+            onChange={e => setFullName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="E-posta adresi"
+            required
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Ödev Başlığı"
+            required
+            value={subject}
+            onChange={e => setSubject(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <textarea placeholder="Açıklama" />
+          <textarea
+            placeholder="Açıklama"
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <input type="file" />
-          <button type="submit" className="upload-btn">
-            Gönder
+          <input
+            type="file"
+            onChange={e => setSelectedFile(e.target.files[0])}
+          />
+          <button type="submit" className="upload-btn" disabled={loading}>
+            {loading ? "Gönderiliyor..." : "Gönder"}
           </button>
         </div>
       </form>
@@ -108,22 +172,85 @@ function OdevTeslimKarti() {
 }
 
 function ProjeTeslimKarti() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", fullName);
+    formData.append("email", email);
+    formData.append("title", subject);
+    formData.append("message", message);
+    formData.append("file", selectedFile);
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/api/proje-gonder", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        alert("Proje gönderildi! ✅");
+        setFullName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+        setSelectedFile(null);
+      } else {
+        alert("Bir hata oluştu ❌");
+      }
+    } catch (error) {
+      console.error("Hata:", error);
+      alert("Sunucuya ulaşılamadı.");
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="card">
       <h2>🚀 Proje Teslimi</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" placeholder="Ad Soyad" required />
-          <input type="email" placeholder="E-posta" required />
-          <input type="text" placeholder="Proje Başlığı" required />
+          <input
+            type="text"
+            placeholder="Ad Soyad"
+            required
+            value={fullName}
+            onChange={e => setFullName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="E-posta"
+            required
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Proje Başlığı"
+            required
+            value={subject}
+            onChange={e => setSubject(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <textarea placeholder="Açıklama" />
+          <textarea
+            placeholder="Açıklama"
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+          />
         </div>
         <div className="form-group">
-          <input type="file" />
-          <button type="submit" className="upload-btn">
-            📩 Gönder
+          <input
+            type="file"
+            onChange={e => setSelectedFile(e.target.files[0])}
+          />
+          <button type="submit" className="upload-btn" disabled={loading}>
+            {loading ? "Gönderiliyor..." : "Gönder"}
           </button>
         </div>
       </form>
@@ -144,6 +271,87 @@ function QuizKarti() {
 }
 
 function DersTakipKarti() {
+  const lesson_title = "Hafta 2 - Frontend Giriş";
+  const [selected, setSelected] = useState(null);
+  const [locked, setLocked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSelect = async value => {
+    if (locked) return;
+    setSelected(value);
+    setLoading(true);
+    const user = await supabase.auth.getUser();
+    const user_id = user.data.user?.id;
+    if (user_id) {
+      let attended = false;
+      let watched_recording = false;
+      if (value === "attended") attended = true;
+      if (value === "watched") watched_recording = true;
+      const { data, error } = await supabase.from("lesson_attendance").insert([
+        {
+          user_id,
+          lesson_title,
+          attended,
+          watched_recording,
+          date: new Date().toISOString().slice(0, 10),
+        },
+      ]);
+      console.log("Supabase insert result:", data, "error:", error);
+      if (error) {
+        alert("Kayıt sırasında hata oluştu: " + error.message);
+      } else {
+        setLocked(true);
+      }
+    }
+    setLoading(false);
+  };
+
+  const cardBase = {
+    borderRadius: 18,
+    padding: 28,
+    minHeight: 120,
+    cursor: locked ? "not-allowed" : "pointer",
+    boxShadow: "0 4px 18px rgba(30,60,120,0.07)",
+    transition: "all 0.18s",
+    border: "2.5px solid #e5e7eb",
+    background: "#fff",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  };
+
+  const cardList = [
+    {
+      value: "attended",
+      icon: "🟪",
+      title: "Katıldım",
+      desc: "Canlı derse aktif olarak katılım sağladım.",
+      color: "#7c3aed",
+      selectedBg: "#ede9fe",
+      selectedBorder: "#7c3aed",
+    },
+    {
+      value: "watched",
+      icon: "🟦",
+      title: "Ders Kaydını İzledim",
+      desc: "Canlıya katılamadım ama kaydını sonradan izledim.",
+      color: "#2563eb",
+      selectedBg: "#dbeafe",
+      selectedBorder: "#2563eb",
+    },
+    {
+      value: "none",
+      icon: "🟥",
+      title: "Katılım Göstermedim",
+      desc: "Bu haftaki derse hiçbir şekilde katılım sağlayamadım.",
+      color: "#ef4444",
+      selectedBg: "#fee2e2",
+      selectedBorder: "#ef4444",
+    },
+  ];
+
   return (
     <div className="card">
       <h3 className="card-title">
@@ -155,9 +363,90 @@ function DersTakipKarti() {
       <p className="card-subtext">
         Bu haftaki dersin tarihleri: <strong>10–12 Temmuz, 19:00–21:00</strong>
       </p>
-      <div className="card-buttons">
-        <button className="btn-primary">✅ Katıldım</button>
-        <button className="btn-secondary">🎬 Ders Kaydı İzle</button>
+      {locked && (
+        <p
+          style={{
+            color: "#22c55e",
+            fontWeight: 600,
+            marginTop: 18,
+            fontSize: 16,
+          }}
+        >
+          ✅ Katılım tercihiniz başarıyla kaydedildi ve artık değiştirilemez.
+        </p>
+      )}
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        style={{
+          marginTop: 22,
+          opacity: locked ? 0.6 : 1,
+          pointerEvents: locked ? "none" : "auto",
+        }}
+      >
+        {cardList.map(card => {
+          const isSelected = selected === card.value;
+          return (
+            <div
+              key={card.value}
+              onClick={() => handleSelect(card.value)}
+              style={{
+                ...cardBase,
+                border: isSelected
+                  ? `2.5px solid ${card.selectedBorder}`
+                  : cardBase.border,
+                background: isSelected ? card.selectedBg : cardBase.background,
+                color: isSelected ? card.selectedBorder : "#222",
+                transform:
+                  !locked && isSelected
+                    ? "scale(1.04)"
+                    : !locked
+                    ? "scale(1.01)"
+                    : "none",
+                boxShadow: isSelected
+                  ? `0 6px 24px ${card.selectedBorder}22`
+                  : cardBase.boxShadow,
+                cursor: locked ? "not-allowed" : "pointer",
+              }}
+              className="attendance-card group"
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  fontSize: 22,
+                  fontWeight: 700,
+                }}
+              >
+                <span style={{ color: card.color, fontSize: 28 }}>
+                  {card.icon}
+                </span>
+                <span>{card.title}</span>
+                {isSelected && (
+                  <span
+                    style={{ color: "#22c55e", fontSize: 18, marginLeft: 8 }}
+                  >
+                    ✅ Seçildi
+                  </span>
+                )}
+              </div>
+              <div style={{ fontSize: 15, color: "#64748b", marginTop: 8 }}>
+                {card.desc}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div
+        style={{
+          marginTop: 18,
+          fontSize: 13,
+          color: "#64748b",
+          textAlign: "center",
+        }}
+      >
+        📌 Lütfen yalnızca bir seçenek belirleyin. Seçim sonrasında değişiklik
+        yapamazsınız.
       </div>
     </div>
   );
@@ -258,7 +547,7 @@ export default function Kampus() {
           {/* Modern Proje Teslimi Kartı */}
           <ProjeTeslimKarti />
           {/* Modern Quiz/Sınav Kartı */}
-          <QuizKarti />
+          <QuizAlani />
           {/* Modern Ders Takibi & Katılım Kartı */}
           <DersTakipKarti />
           {/* Modern Mentor Görüşmeleri Kartı */}
