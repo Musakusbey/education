@@ -453,20 +453,154 @@ function DersTakipKarti() {
 }
 
 function MentorGorusmeKarti() {
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="card">
-      <h3 className="card-title">
-        <span role="img" aria-label="mentor">
-          💬
+      {!showForm ? (
+        <>
+          <h3 className="card-title">
+            <span role="img" aria-label="mentor">
+              💬
+            </span>{" "}
+            Mentor Görüşmeleri
+          </h3>
+          <p className="card-subtext">
+            Mentor ile birebir görüşme planlamak için aşağıdan seçim
+            yapabilirsin.
+          </p>
+          <button className="planla-btn mt-2" onClick={() => setShowForm(true)}>
+            <span role="img" aria-label="takvim">
+              📅
+            </span>{" "}
+            Planla
+          </button>
+        </>
+      ) : (
+        <MentorGorusmeFormu onClose={() => setShowForm(false)} />
+      )}
+    </div>
+  );
+}
+
+function MentorGorusmeFormu({ onClose }) {
+  const [mentorName, setMentorName] = useState("");
+  const [meetingDate, setMeetingDate] = useState("");
+  const [meetingTime, setMeetingTime] = useState("");
+  const [notes, setNotes] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+    const user = await supabase.auth.getUser();
+    const user_id = user.data.user?.id;
+    if (!user_id) {
+      setError("Kullanıcı oturumu bulunamadı.");
+      setLoading(false);
+      return;
+    }
+    const { data, error } = await supabase.from("mentor_meetings").insert([
+      {
+        user_id,
+        mentor_name: mentorName,
+        meeting_date: meetingDate,
+        meeting_time: meetingTime,
+        notes,
+        status: "pending",
+      },
+    ]);
+    if (error) {
+      setError("Kayıt sırasında hata oluştu: " + error.message);
+    } else {
+      setSuccess(true);
+      setMentorName("");
+      setMeetingDate("");
+      setMeetingTime("");
+      setNotes("");
+      setTimeout(() => {
+        setSuccess(false);
+        if (onClose) onClose();
+      }, 1500);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="mentor-planner-container mt-6">
+      <h2>
+        <span role="img" aria-label="takvim">
+          📅
         </span>{" "}
-        Mentor Görüşmeleri
-      </h3>
-      <p className="card-subtext">
-        Mentor ile birebir görüşme planlamak için aşağıdan seçim yapabilirsin.
-      </p>
-      <div className="card-buttons">
-        <button className="btn-primary">🗓 Planla</button>
-      </div>
+        Mentor Görüşmesi Planla
+      </h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Örn: Ahmet Yılmaz"
+          value={mentorName}
+          onChange={e => setMentorName(e.target.value)}
+          required
+        />
+        <input
+          type="date"
+          value={meetingDate}
+          onChange={e => setMeetingDate(e.target.value)}
+          required
+        />
+        <input
+          type="time"
+          value={meetingTime}
+          onChange={e => setMeetingTime(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Görüşme notunuzu buraya yazabilirsiniz..."
+          value={notes}
+          onChange={e => setNotes(e.target.value)}
+          rows={3}
+        ></textarea>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <button type="submit" className="save-btn" disabled={loading}>
+            {loading ? "Kaydediliyor..." : "Kaydet"}
+          </button>
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={onClose}
+            disabled={loading}
+          >
+            İptal
+          </button>
+        </div>
+        {success && (
+          <div
+            style={{
+              marginTop: "1rem",
+              color: "#22c55e",
+              fontWeight: 600,
+              textAlign: "center",
+            }}
+          >
+            Görüşme başarıyla planlandı!
+          </div>
+        )}
+        {error && (
+          <div
+            style={{
+              marginTop: "1rem",
+              color: "#ef4444",
+              fontWeight: 600,
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </div>
+        )}
+      </form>
     </div>
   );
 }

@@ -70,3 +70,91 @@
     margin: 8px auto;
     display: block;
 }
+
+/* Mentor Planner özel stilleri */
+.mentor-planner-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.mentor-planner-container h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mentor-planner-container input[type="text"],
+.mentor-planner-container input[type="date"],
+.mentor-planner-container input[type="time"],
+.mentor-planner-container textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    cursor: text;
+}
+
+.mentor-planner-container input[type="text"]:focus,
+.mentor-planner-container input[type="date"]:focus,
+.mentor-planner-container input[type="time"]:focus,
+.mentor-planner-container textarea:focus {
+    border-color: #8a4fff;
+    outline: none;
+}
+
+.mentor-planner-container button {
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mentor-planner-container .save-btn {
+    background-color: #8a4fff;
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.mentor-planner-container .save-btn:hover {
+    background-color: #6f38d3;
+}
+
+.mentor-planner-container .cancel-btn {
+    background-color: #f2f2f2;
+    color: #555;
+}
+
+.mentor-planner-container .cancel-btn:hover {
+    background-color: #ddd;
+}
+
+.planla-btn {
+    background-color: #8a4fff;
+    color: white;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.planla-btn:hover {
+    background-color: #6f38d3;
+}
