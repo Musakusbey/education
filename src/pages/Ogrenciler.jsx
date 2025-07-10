@@ -102,7 +102,11 @@ function OdevTeslimKarti() {
     formData.append("message", message);
     formData.append("file", selectedFile);
     try {
-      const response = await fetch("http://localhost:5000/api/odev-gonder", {
+      const apiUrl =
+        window.location.hostname === "localhost"
+          ? "http://localhost:5000/api/odev-gonder"
+          : "/api/odev-gonder";
+      const response = await fetch(apiUrl, {
         method: "POST",
         body: formData,
       });
@@ -381,7 +385,11 @@ function ProjeTeslimKarti() {
     formData.append("message", message);
     formData.append("file", selectedFile);
     try {
-      const response = await fetch("http://localhost:5000/api/proje-gonder", {
+      const apiUrl =
+        window.location.hostname === "localhost"
+          ? "http://localhost:5000/api/proje-gonder"
+          : "/api/proje-gonder";
+      const response = await fetch(apiUrl, {
         method: "POST",
         body: formData,
       });
