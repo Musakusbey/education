@@ -13,7 +13,8 @@ function OdevTeslimFormu() {
     formData.append("email", email);
     formData.append("dosya", dosya);
 
-    await fetch("http://localhost:5000/api/odev", {
+    const API_URL = import.meta.env.VITE_API_URL;
+    await fetch(`${API_URL}/api/odev`, {
       method: "POST",
       body: formData,
     });

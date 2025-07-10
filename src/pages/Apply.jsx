@@ -147,10 +147,8 @@ export default function Apply() {
     setLoading(true);
     setError("");
     try {
-      const apiUrl =
-        window.location.hostname === "localhost"
-          ? "http://localhost:5000/api/contact"
-          : "/api/contact";
+      const API_URL = import.meta.env.VITE_API_URL;
+      const apiUrl = `${API_URL}/api/contact`;
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

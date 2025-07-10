@@ -18,8 +18,9 @@ export default function OdevTeslim() {
     formData.append("baslik", baslik);
     formData.append("aciklama", aciklama);
     formData.append("dosya", dosya);
+    const API_URL = import.meta.env.VITE_API_URL;
     try {
-      await fetch("http://localhost:5000/api/odev", {
+      await fetch(`${API_URL}/api/odev`, {
         method: "POST",
         body: formData,
       });
