@@ -91,7 +91,7 @@ function OdevTeslimKarti() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -101,14 +101,13 @@ function OdevTeslimKarti() {
     formData.append("title", subject);
     formData.append("message", message);
     formData.append("file", selectedFile);
-    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/odev-gonder", {
         method: "POST",
         body: formData,
       });
       if (response.ok) {
-        alert("Gönderildi! ✅");
+        setSuccess(true);
         setFullName("");
         setEmail("");
         setSubject("");
@@ -121,7 +120,6 @@ function OdevTeslimKarti() {
       console.error("Hata:", error);
       alert("Sunucuya ulaşılamadı.");
     }
-    setLoading(false);
   };
 
   return (
@@ -132,47 +130,65 @@ function OdevTeslimKarti() {
         </svg>
         Ödev Teslim Formu
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="odev-form-group">
-          <input
-            type="text"
-            placeholder="Ad Soyad"
-            required
-            value={fullName}
-            onChange={e => setFullName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="E-posta adresi"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Ödev Başlığı"
-            required
-            value={subject}
-            onChange={e => setSubject(e.target.value)}
-          />
+      {success && (
+        <div className="form-success-box">
+          <div className="form-success-header">
+            <span className="form-success-icon">✅</span>
+            <span className="form-success-title">Gönderim Başarılı</span>
+          </div>
+          <div className="form-success-content">
+            Ödeviniz başarıyla gönderildi.
+          </div>
         </div>
-        <div className="odev-form-group">
-          <textarea
-            placeholder="Açıklama"
-            value={message}
-            onChange={e => setMessage(e.target.value)}
-          />
-        </div>
-        <div className="odev-form-group">
-          <input
-            type="file"
-            onChange={e => setSelectedFile(e.target.files[0])}
-          />
-          <button className="odev-form-btn" type="submit" disabled={loading}>
-            {loading ? "Gönderiliyor..." : "Gönder"}
-          </button>
-        </div>
-      </form>
+      )}
+      {!success && (
+        <form onSubmit={handleSubmit}>
+          <div className="odev-form-group">
+            <input
+              type="text"
+              placeholder="Ad Soyad"
+              required
+              value={fullName}
+              onChange={e => setFullName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="E-posta adresi"
+              required
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Ödev Başlığı"
+              required
+              value={subject}
+              onChange={e => setSubject(e.target.value)}
+            />
+          </div>
+          <div className="odev-form-group">
+            <textarea
+              placeholder="Açıklama"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+            />
+          </div>
+          {/* Uyarı mesajı */}
+          <div className="form-warning-box">
+            📌 Lütfen yalnızca bir gönderim yapınız. Gönderim sonrası değişiklik
+            yapılamaz.
+          </div>
+          <div className="odev-form-group">
+            <input
+              type="file"
+              onChange={e => setSelectedFile(e.target.files[0])}
+            />
+            <button className="odev-form-btn" type="submit">
+              Gönder
+            </button>
+          </div>
+        </form>
+      )}
       <style>{`
         .odev-form-card {
           background: #fff;
@@ -247,6 +263,61 @@ function OdevTeslimKarti() {
           }
         }
       `}</style>
+      <style>{`
+        .form-success-box {
+          background: #e6f9ed;
+          border: 2px solid #22c55e;
+          border-radius: 1rem;
+          box-shadow: 0 4px 24px rgba(34,197,94,0.10);
+          padding: 1.5rem 2rem;
+          margin-bottom: 1.5rem;
+          margin-top: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.7rem;
+        }
+        .form-success-header {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #15803d;
+        }
+        .form-success-icon {
+          font-size: 1.5rem;
+        }
+        .form-success-title {
+          font-size: 1.18rem;
+          font-weight: 700;
+        }
+        .form-success-content {
+          color: #166534;
+          font-size: 1.08rem;
+          margin-left: 2.2rem;
+        }
+        .form-success-note {
+          color: #166534;
+          font-size: 0.98rem;
+          margin-left: 2.2rem;
+          margin-top: 0.2rem;
+          font-style: italic;
+        }
+      `}</style>
+      <style>{`
+        .form-warning-box {
+          background: #f3f4f6;
+          color: #374151;
+          font-size: 0.92rem;
+          font-style: italic;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.7rem;
+          margin-top: 0.2rem;
+          display: inline-block;
+        }
+      `}</style>
     </div>
   );
 }
@@ -257,7 +328,7 @@ function ProjeTeslimKarti() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -267,14 +338,13 @@ function ProjeTeslimKarti() {
     formData.append("title", subject);
     formData.append("message", message);
     formData.append("file", selectedFile);
-    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/proje-gonder", {
         method: "POST",
         body: formData,
       });
       if (response.ok) {
-        alert("Proje gönderildi! ✅");
+        setSuccess(true);
         setFullName("");
         setEmail("");
         setSubject("");
@@ -287,7 +357,6 @@ function ProjeTeslimKarti() {
       console.error("Hata:", error);
       alert("Sunucuya ulaşılamadı.");
     }
-    setLoading(false);
   };
 
   return (
@@ -301,47 +370,65 @@ function ProjeTeslimKarti() {
         </svg>
         Proje Teslimi
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="odev-form-group">
-          <input
-            type="text"
-            placeholder="Ad Soyad"
-            required
-            value={fullName}
-            onChange={e => setFullName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="E-posta"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Proje Başlığı"
-            required
-            value={subject}
-            onChange={e => setSubject(e.target.value)}
-          />
+      {success && (
+        <div className="form-success-box">
+          <div className="form-success-header">
+            <span className="form-success-icon">✅</span>
+            <span className="form-success-title">Gönderim Başarılı</span>
+          </div>
+          <div className="form-success-content">
+            Projeniz başarıyla gönderildi.
+          </div>
         </div>
-        <div className="odev-form-group">
-          <textarea
-            placeholder="Açıklama"
-            value={message}
-            onChange={e => setMessage(e.target.value)}
-          />
-        </div>
-        <div className="odev-form-group">
-          <input
-            type="file"
-            onChange={e => setSelectedFile(e.target.files[0])}
-          />
-          <button className="odev-form-btn" type="submit" disabled={loading}>
-            {loading ? "Gönderiliyor..." : "Gönder"}
-          </button>
-        </div>
-      </form>
+      )}
+      {!success && (
+        <form onSubmit={handleSubmit}>
+          <div className="odev-form-group">
+            <input
+              type="text"
+              placeholder="Ad Soyad"
+              required
+              value={fullName}
+              onChange={e => setFullName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="E-posta"
+              required
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Proje Başlığı"
+              required
+              value={subject}
+              onChange={e => setSubject(e.target.value)}
+            />
+          </div>
+          <div className="odev-form-group">
+            <textarea
+              placeholder="Açıklama"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+            />
+          </div>
+          {/* Uyarı mesajı */}
+          <div className="form-warning-box">
+            📌 Lütfen yalnızca bir gönderim yapınız. Gönderim sonrası değişiklik
+            yapılamaz.
+          </div>
+          <div className="odev-form-group">
+            <input
+              type="file"
+              onChange={e => setSelectedFile(e.target.files[0])}
+            />
+            <button className="odev-form-btn" type="submit">
+              Gönder
+            </button>
+          </div>
+        </form>
+      )}
       <style>{`
         .odev-form-card {
           background: #fff;
@@ -414,6 +501,61 @@ function ProjeTeslimKarti() {
             flex-direction: column;
             gap: 0.5rem;
           }
+        }
+      `}</style>
+      <style>{`
+        .form-success-box {
+          background: #e6f9ed;
+          border: 2px solid #22c55e;
+          border-radius: 1rem;
+          box-shadow: 0 4px 24px rgba(34,197,94,0.10);
+          padding: 1.5rem 2rem;
+          margin-bottom: 1.5rem;
+          margin-top: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.7rem;
+        }
+        .form-success-header {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #15803d;
+        }
+        .form-success-icon {
+          font-size: 1.5rem;
+        }
+        .form-success-title {
+          font-size: 1.18rem;
+          font-weight: 700;
+        }
+        .form-success-content {
+          color: #166534;
+          font-size: 1.08rem;
+          margin-left: 2.2rem;
+        }
+        .form-success-note {
+          color: #166534;
+          font-size: 0.98rem;
+          margin-left: 2.2rem;
+          margin-top: 0.2rem;
+          font-style: italic;
+        }
+      `}</style>
+      <style>{`
+        .form-warning-box {
+          background: #f3f4f6;
+          color: #374151;
+          font-size: 0.92rem;
+          font-style: italic;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.7rem;
+          margin-top: 0.2rem;
+          display: inline-block;
         }
       `}</style>
     </div>
@@ -436,12 +578,10 @@ function DersTakipKarti() {
   const lesson_title = "Hafta 2 - Frontend Giriş";
   const [selected, setSelected] = useState(null);
   const [locked, setLocked] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleSelect = async value => {
     if (locked) return;
     setSelected(value);
-    setLoading(true);
     const user = await supabase.auth.getUser();
     const user_id = user.data.user?.id;
     if (user_id) {
@@ -465,7 +605,6 @@ function DersTakipKarti() {
         setLocked(true);
       }
     }
-    setLoading(false);
   };
 
   const cardBase = {
@@ -649,20 +788,15 @@ function MentorGorusmeFormu({ onClose }) {
   const [meetingDate, setMeetingDate] = useState("");
   const [meetingTime, setMeetingTime] = useState("");
   const [notes, setNotes] = useState("");
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess(false);
     const user = await supabase.auth.getUser();
     const user_id = user.data.user?.id;
     if (!user_id) {
       setError("Kullanıcı oturumu bulunamadı.");
-      setLoading(false);
       return;
     }
     const { error } = await supabase.from("mentor_meetings").insert([
@@ -688,7 +822,6 @@ function MentorGorusmeFormu({ onClose }) {
         if (onClose) onClose();
       }, 1500);
     }
-    setLoading(false);
   };
 
   return (
@@ -726,15 +859,10 @@ function MentorGorusmeFormu({ onClose }) {
           rows={3}
         ></textarea>
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          <button type="submit" className="save-btn" disabled={loading}>
-            {loading ? "Kaydediliyor..." : "Kaydet"}
+          <button type="submit" className="save-btn">
+            Kaydet
           </button>
-          <button
-            type="button"
-            className="cancel-btn"
-            onClick={onClose}
-            disabled={loading}
-          >
+          <button type="button" className="cancel-btn" onClick={onClose}>
             İptal
           </button>
         </div>
@@ -1053,22 +1181,14 @@ function DuyurularGrid() {
 
 export default function Kampus() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const ad = "öğrenci"; // Supabase ile isim alınacaksa eklenebilir
   const handleLogout = async () => {
-    setLoading(true);
     await supabase.auth.signOut();
-    setLoading(false);
     navigate("/giris");
   };
   return (
     <div className="kampus-panel-root min-h-screen bg-gray-100 py-10 px-4">
       <DuyuruBanner />
-      <button
-        className="pro-header-logout-fixed"
-        onClick={handleLogout}
-        disabled={loading}
-      >
+      <button className="pro-header-logout-fixed" onClick={handleLogout}>
         Çıkış
       </button>
       <div className="pro-header-card">
