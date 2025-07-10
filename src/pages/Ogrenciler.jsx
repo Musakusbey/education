@@ -681,53 +681,176 @@ function DuyuruBanner() {
   );
 }
 
-// Açılır duyurular alanı
-function DuyurularAccordion() {
+// Modern Grid Duyurular Alanı (sayfa altı)
+function DuyurularGrid() {
+  const duyurular = [
+    {
+      tarihGun: "12",
+      tarihAy: "Temmuz",
+      baslik: "Proje Teslimi Son Günü",
+      ozet: "Tüm öğrenciler için proje teslimi 12 Temmuz saat 23:59'a kadar yapılmalıdır. Eksik teslimler değerlendirmeye alınmayacaktır.",
+      detay: "Detay",
+    },
+    {
+      tarihGun: "15",
+      tarihAy: "Temmuz",
+      baslik: "Mentor Görüşmeleri Başlıyor",
+      ozet: "Mentor randevularınızı kampüs panelinden planlayabilirsiniz. Görüşmeler online olarak Zoom üzerinden yapılacaktır.",
+      detay: "Detay",
+    },
+    {
+      tarihGun: "18",
+      tarihAy: "Temmuz",
+      baslik: "Yaz Okulu Başvuruları Açıldı",
+      ozet: "2025 yaz okulu başvuruları 18 Temmuz'a kadar devam edecek. Başvuru ve ders seçimi için paneli kullanabilirsiniz.",
+      detay: "Detay",
+    },
+    {
+      tarihGun: "22",
+      tarihAy: "Temmuz",
+      baslik: "Haftalık Quizler Aktif!",
+      ozet: "Her hafta yeni quizler panelde açılıyor. Katılım zorunlu olup, quiz sonuçları anında puanınıza yansıyacaktır.",
+      detay: "Detay",
+    },
+    {
+      tarihGun: "25",
+      tarihAy: "Temmuz",
+      baslik: "Kampüs Etkinlikleri Duyurusu",
+      ozet: "Temmuz ayı boyunca çeşitli online ve yüz yüze etkinlikler düzenlenecektir. Katılım için detayları takip edin.",
+      detay: "Detay",
+    },
+    {
+      tarihGun: "30",
+      tarihAy: "Temmuz",
+      baslik: "Final Sınavı Takvimi Yayında",
+      ozet: "2024-2025 Bahar dönemi final sınavı takvimi açıklandı. Sınav tarihlerinizi ve saatlerinizi panelden kontrol edebilirsiniz.",
+      detay: "Detay",
+    },
+  ];
   return (
-    <details
-      style={{
-        background: "#fff",
-        borderRadius: "1rem",
-        boxShadow: "0 4px 24px rgba(30,60,120,0.10)",
-        padding: "2rem 2.5rem 1.5rem 2.5rem",
-        margin: "2rem auto 0 auto",
-        maxWidth: 900,
-        fontSize: "1.1rem",
-      }}
-      open
-    >
-      <summary
-        style={{
-          fontWeight: 800,
-          fontSize: "1.3rem",
-          color: "#1e293b",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <span role="img" aria-label="duyuru">
-          📢
-        </span>{" "}
-        Duyurular & Bildirimler
-      </summary>
-      <ul
-        style={{
-          marginTop: 18,
-          marginLeft: 0,
-          paddingLeft: 18,
-          color: "#374151",
-        }}
-      >
-        <li>
-          <b>12 Temmuz:</b> Proje teslimi için son gün!
-        </li>
-        <li>
-          <b>15 Temmuz:</b> Mentor görüşmeleri başlıyor.
-        </li>
-        <li>Haftalık quizler yakında aktif olacak.</li>
-      </ul>
-    </details>
+    <section className="duyurular-grid-listesi">
+      <h2 className="duyurular-grid-title">DUYURULAR</h2>
+      <div className="duyurular-grid">
+        {duyurular.map((d, i) => (
+          <div className="duyuru-grid-karti" key={i}>
+            <div className="duyuru-tarih">
+              <span className="duyuru-ay">{d.tarihAy}</span>
+              <span className="duyuru-gun">{d.tarihGun}</span>
+            </div>
+            <div className="duyuru-icerik">
+              <h3 className="duyuru-baslik">{d.baslik}</h3>
+              <p className="duyuru-ozet">{d.ozet}</p>
+              <button className="duyuru-btn">{d.detay}</button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <style>{`
+        .duyurular-grid-listesi {
+          max-width: 1200px;
+          margin: 40px auto 60px auto;
+          padding: 0 1rem;
+        }
+        .duyurular-grid-title {
+          font-size: 2.1rem;
+          font-weight: 700;
+          margin-bottom: 2.2rem;
+          color: #111827;
+          letter-spacing: 0.5px;
+        }
+        .duyurular-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          gap: 2.2rem 2.2rem;
+        }
+        .duyuru-grid-karti {
+          display: flex;
+          background: #fff;
+          border-radius: 1.1rem;
+          box-shadow: 0 2px 12px rgba(30,60,120,0.08);
+          padding: 1.5rem 1.2rem;
+          align-items: flex-start;
+          gap: 1.2rem;
+          border-bottom: 2px solid #f3f4f6;
+          transition: box-shadow 0.18s, transform 0.18s;
+        }
+        .duyuru-grid-karti:hover {
+          box-shadow: 0 8px 32px rgba(99,102,241,0.13);
+          transform: translateY(-4px) scale(1.03);
+        }
+        .duyuru-tarih {
+          min-width: 70px;
+          background: #ede9fe;
+          border-radius: 0.7rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0.7rem 0.8rem 0.5rem 0.8rem;
+          margin-right: 0.5rem;
+        }
+        .duyuru-ay {
+          font-size: 1rem;
+          color: #a78bfa;
+          font-weight: 700;
+          text-transform: capitalize;
+        }
+        .duyuru-gun {
+          font-size: 2.1rem;
+          font-weight: 800;
+          color: #6d28d9;
+          line-height: 1;
+        }
+        .duyuru-icerik {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+        .duyuru-baslik {
+          font-size: 1.13rem;
+          font-weight: 700;
+          color: #22223b;
+          margin-bottom: 0.5rem;
+          line-height: 1.3;
+        }
+        .duyuru-ozet {
+          font-size: 0.98rem;
+          color: #444;
+          margin-bottom: 1.1rem;
+          line-height: 1.5;
+        }
+        .duyuru-btn {
+          align-self: flex-start;
+          background: #fff;
+          border: 1.5px solid #a78bfa;
+          color: #6d28d9;
+          font-weight: 600;
+          border-radius: 0.5rem;
+          padding: 0.38rem 1.2rem;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.18s, color 0.18s, border 0.18s;
+        }
+        .duyuru-btn:hover {
+          background: #a78bfa;
+          color: #fff;
+          border-color: #6d28d9;
+        }
+        @media (max-width: 900px) {
+          .duyurular-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media (max-width: 600px) {
+          .duyurular-grid {
+            grid-template-columns: 1fr;
+          }
+          .duyurular-grid-title {
+            font-size: 1.3rem;
+          }
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -777,7 +900,8 @@ export default function Kampus() {
           <ProgressKarti />
         </div>
         {/* Açılır Duyurular Alanı */}
-        <DuyurularAccordion />
+        {/* <DuyurularAccordion /> */}
+        <DuyurularGrid />
       </div>
     </div>
   );
