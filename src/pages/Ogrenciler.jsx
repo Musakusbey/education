@@ -125,10 +125,15 @@ function OdevTeslimKarti() {
   };
 
   return (
-    <div className="card">
-      <h2>📥 Ödev Teslim Formu</h2>
+    <div className="odev-form-card">
+      <div className="odev-form-title">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4z" fill="#6366f1" />
+        </svg>
+        Ödev Teslim Formu
+      </div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="odev-form-group">
           <input
             type="text"
             placeholder="Ad Soyad"
@@ -151,23 +156,97 @@ function OdevTeslimKarti() {
             onChange={e => setSubject(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="odev-form-group">
           <textarea
             placeholder="Açıklama"
             value={message}
             onChange={e => setMessage(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="odev-form-group">
           <input
             type="file"
             onChange={e => setSelectedFile(e.target.files[0])}
           />
-          <button type="submit" className="upload-btn" disabled={loading}>
+          <button className="odev-form-btn" type="submit" disabled={loading}>
             {loading ? "Gönderiliyor..." : "Gönder"}
           </button>
         </div>
       </form>
+      <style>{`
+        .odev-form-card {
+          background: #fff;
+          border-radius: 1.5rem;
+          box-shadow: 0 6px 32px rgba(99,102,241,0.09);
+          padding: 2.2rem 2.5rem 1.5rem 2.5rem;
+          margin-bottom: 2.5rem;
+          max-width: 1100px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .odev-form-title {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #312e81;
+          margin-bottom: 1.5rem;
+        }
+        .odev-form-title svg {
+          color: #6366f1;
+          font-size: 2rem;
+        }
+        .odev-form-group {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 1.2rem;
+          flex-wrap: wrap;
+        }
+        .odev-form-group input,
+        .odev-form-group textarea {
+          flex: 1;
+          min-width: 220px;
+          padding: 12px 16px;
+          border: 1.5px solid #e5e7eb;
+          border-radius: 0.7rem;
+          font-size: 1rem;
+          background: #f9fafb;
+          transition: border 0.2s, box-shadow 0.2s;
+        }
+        .odev-form-group input:focus,
+        .odev-form-group textarea:focus {
+          border-color: #7c3aed;
+          box-shadow: 0 0 0 2px #a5b4fc55;
+          outline: none;
+        }
+        .odev-form-btn {
+          background: linear-gradient(90deg, #7c3aed 60%, #6366f1 100%);
+          color: #fff;
+          font-weight: 700;
+          padding: 12px 32px;
+          border-radius: 0.7rem;
+          border: none;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.2s;
+          margin-left: auto;
+          display: block;
+        }
+        .odev-form-btn:hover {
+          background: linear-gradient(90deg, #5b21b6 60%, #6366f1 100%);
+          transform: scale(1.04);
+        }
+        @media (max-width: 700px) {
+          .odev-form-card {
+            padding: 1.2rem 0.7rem;
+          }
+          .odev-form-group {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }
@@ -212,10 +291,18 @@ function ProjeTeslimKarti() {
   };
 
   return (
-    <div className="card">
-      <h2>🚀 Proje Teslimi</h2>
+    <div className="odev-form-card">
+      <div className="odev-form-title">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+          <path
+            d="M12 2C13.1 2 14 2.9 14 4V6.18C17.16 6.6 19.5 9.27 19.5 12.5C19.5 15.54 17.04 18 14 18C10.96 18 8.5 15.54 8.5 12.5C8.5 9.27 10.84 6.6 14 6.18V4C14 2.9 13.1 2 12 2ZM12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20Z"
+            fill="#f43f5e"
+          />
+        </svg>
+        Proje Teslimi
+      </div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="odev-form-group">
           <input
             type="text"
             placeholder="Ad Soyad"
@@ -238,23 +325,97 @@ function ProjeTeslimKarti() {
             onChange={e => setSubject(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="odev-form-group">
           <textarea
             placeholder="Açıklama"
             value={message}
             onChange={e => setMessage(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="odev-form-group">
           <input
             type="file"
             onChange={e => setSelectedFile(e.target.files[0])}
           />
-          <button type="submit" className="upload-btn" disabled={loading}>
+          <button className="odev-form-btn" type="submit" disabled={loading}>
             {loading ? "Gönderiliyor..." : "Gönder"}
           </button>
         </div>
       </form>
+      <style>{`
+        .odev-form-card {
+          background: #fff;
+          border-radius: 1.5rem;
+          box-shadow: 0 6px 32px rgba(99,102,241,0.09);
+          padding: 2.2rem 2.5rem 1.5rem 2.5rem;
+          margin-bottom: 2.5rem;
+          max-width: 1100px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .odev-form-title {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #312e81;
+          margin-bottom: 1.5rem;
+        }
+        .odev-form-title svg {
+          color: #6366f1;
+          font-size: 2rem;
+        }
+        .odev-form-group {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 1.2rem;
+          flex-wrap: wrap;
+        }
+        .odev-form-group input,
+        .odev-form-group textarea {
+          flex: 1;
+          min-width: 220px;
+          padding: 12px 16px;
+          border: 1.5px solid #e5e7eb;
+          border-radius: 0.7rem;
+          font-size: 1rem;
+          background: #f9fafb;
+          transition: border 0.2s, box-shadow 0.2s;
+        }
+        .odev-form-group input:focus,
+        .odev-form-group textarea:focus {
+          border-color: #7c3aed;
+          box-shadow: 0 0 0 2px #a5b4fc55;
+          outline: none;
+        }
+        .odev-form-btn {
+          background: linear-gradient(90deg, #7c3aed 60%, #6366f1 100%);
+          color: #fff;
+          font-weight: 700;
+          padding: 12px 32px;
+          border-radius: 0.7rem;
+          border: none;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.2s;
+          margin-left: auto;
+          display: block;
+        }
+        .odev-form-btn:hover {
+          background: linear-gradient(90deg, #5b21b6 60%, #6366f1 100%);
+          transform: scale(1.04);
+        }
+        @media (max-width: 700px) {
+          .odev-form-card {
+            padding: 1.2rem 0.7rem;
+          }
+          .odev-form-group {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }
@@ -609,67 +770,103 @@ function MentorGorusmeFormu({ onClose }) {
 // --- DuyuruBanner: Baştan Modern ve Sorunsuz ---
 function DuyuruBanner() {
   const [visible, setVisible] = React.useState(true);
-
-  const handleClose = () => {
-    setVisible(false);
-  };
-
+  const handleClose = () => setVisible(false);
   if (!visible) return null;
-
   return (
-    <div className="duyuru-banner">
-      <span className="duyuru-icon" role="img" aria-label="duyuru">
-        📢
+    <div className="pro-banner">
+      <span className="pro-banner-icon" aria-label="duyuru">
+        {/* Modern vektörel megafon icon */}
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+          <path
+            d="M3 10v4a1 1 0 0 0 1 1h2l3.29 3.29A1 1 0 0 0 11 18v-2h2a1 1 0 0 0 1-1v-2.18a7.001 7.001 0 0 0 0-9.64V5a1 1 0 0 0-1-1h-2V2a1 1 0 0 0-1.71-.71L6 4H4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2l3.29 3.29A1 1 0 0 0 11 14v-2h2a1 1 0 0 0 1-1V9.82a7.001 7.001 0 0 0 0-9.64V5a1 1 0 0 0-1 1h-2V2a1 1 0 0 0-1.71-.71L6 4H4a1 1 0 0 0-1 1v5z"
+            fill="#f59e42"
+          />
+        </svg>
       </span>
-      <span className="duyuru-text">
-        <b>Yeni duyuru:</b> 12 Temmuz Proje teslimi için son gün! &nbsp;|&nbsp;
-        15 Temmuz Mentor görüşmeleri başlıyor. &nbsp;|&nbsp; Haftalık quizler
-        yakında aktif olacak.
-      </span>
-      <button className="duyuru-close" onClick={handleClose}>
-        Kapat ✕
+      <div className="pro-banner-content">
+        <span className="pro-banner-title">Yeni Duyuru:</span>
+        <span className="pro-banner-text">
+          12 Temmuz: Proje teslimi için son gün!{" "}
+          <span className="pro-banner-sep">|</span> 15 Temmuz: Mentor
+          görüşmeleri başlıyor. <span className="pro-banner-sep">|</span>{" "}
+          Haftalık quizler yakında aktif olacak.
+        </span>
+      </div>
+      <button
+        className="pro-banner-close"
+        onClick={handleClose}
+        aria-label="Kapat"
+      >
+        ×
       </button>
       <style>{`
-        .duyuru-banner {
+        .pro-banner {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
           gap: 1.2rem;
-          background: linear-gradient(90deg, #fef9c3 60%, #fde68a 100%);
-          color: #92400e;
+          background: linear-gradient(90deg, #fffbe6 60%, #fef3c7 100%);
+          color: #b45309;
           border-radius: 1.2rem;
           box-shadow: 0 4px 24px rgba(251,191,36,0.13);
           font-size: 1.13rem;
-          font-weight: 600;
+          font-weight: 500;
           padding: 1.1rem 2.2rem;
           margin: 0 auto 2rem auto;
           max-width: 900px;
           position: relative;
+          border: 1.5px solid #fde68a;
+          animation: pro-banner-fadein 0.7s cubic-bezier(.4,0,.2,1);
         }
-        .duyuru-icon {
-          font-size: 1.5rem;
-          margin-right: 0.5rem;
+        @keyframes pro-banner-fadein {
+          from { opacity: 0; transform: translateY(-16px); }
+          to { opacity: 1; transform: none; }
         }
-        .duyuru-text {
+        .pro-banner-icon {
+          flex-shrink: 0;
+          margin-right: 0.7rem;
+          display: flex;
+          align-items: center;
+        }
+        .pro-banner-content {
+          display: flex;
+          flex-direction: column;
           flex: 1;
         }
-        .duyuru-close {
+        .pro-banner-title {
+          font-weight: 700;
+          color: #b45309;
+          font-size: 1.08rem;
+          margin-bottom: 0.1rem;
+        }
+        .pro-banner-text {
+          color: #92400e;
+          font-size: 1.05rem;
+        }
+        .pro-banner-sep {
+          color: #eab308;
+          font-weight: 700;
+          margin: 0 0.5rem;
+        }
+        .pro-banner-close {
           background: none;
           border: none;
-          color: #92400e;
+          color: #b45309;
           font-weight: 700;
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           margin-left: 1.2rem;
           cursor: pointer;
           border-radius: 0.5rem;
           padding: 0.2rem 0.7rem;
-          transition: background 0.18s;
+          transition: background 0.18s, color 0.18s, transform 0.18s;
         }
-        .duyuru-close:hover {
+        .pro-banner-close:hover {
           background: #fde68a;
+          color: #92400e;
+          transform: scale(1.15) rotate(8deg);
         }
         @media (max-width: 600px) {
-          .duyuru-banner {
+          .pro-banner {
             flex-direction: column;
             font-size: 1rem;
             padding: 1rem 0.7rem;
@@ -867,42 +1064,161 @@ export default function Kampus() {
   return (
     <div className="kampus-panel-root min-h-screen bg-gray-100 py-10 px-4">
       <DuyuruBanner />
-      <div className="max-w-5xl mx-auto space-y-10">
-        {/* Üst header ve başlık */}
-        <div className="header-container">
-          <p>Hoş geldin, {ad}!</p>
-          <button
-            className="logout-btn"
-            onClick={handleLogout}
-            disabled={loading}
-          >
-            Çıkış
-          </button>
+      <button
+        className="pro-header-logout-fixed"
+        onClick={handleLogout}
+        disabled={loading}
+      >
+        Çıkış
+      </button>
+      <div className="pro-header-card">
+        <div className="pro-header-flex">
+          <span className="pro-header-icon">
+            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
+              <path
+                d="M12 2a2 2 0 0 1 2 2v2h-4V4a2 2 0 0 1 2-2zm-7 8a7 7 0 1 1 14 0A7 7 0 0 1 3 10zm7 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"
+                fill="#6366f1"
+              />
+            </svg>
+          </span>
+          <div>
+            <h1 className="pro-header-title">
+              Frovexis Kampüsü – Aktif Öğrenciler İçin Kontrol Paneli
+            </h1>
+            <p className="pro-header-desc">
+              Projeler, ödevler, ilerleme puanları ve daha fazlası...
+            </p>
+          </div>
         </div>
-        <h1 className="page-title">
-          🎓 Frovexis Kampüsü – Aktif Öğrenciler İçin Kontrol Paneli
-        </h1>
-        <p className="page-subtitle">
-          Projeler, ödevler, ilerleme puanları ve daha fazlası…
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Modern Ödev Teslimi Kartı */}
-          <OdevTeslimKarti />
-          {/* Modern Proje Teslimi Kartı */}
-          <ProjeTeslimKarti />
-          {/* Modern Quiz/Sınav Kartı */}
-          <QuizAlani />
-          {/* Modern Ders Takibi & Katılım Kartı */}
+        <style>{`
+          .pro-header-logout-fixed {
+            position: fixed;
+            top: 32px;
+            right: 48px;
+            z-index: 50;
+            padding: 10px 28px;
+            background-color: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.13rem;
+            box-shadow: 0 2px 12px rgba(124,51,237,0.13);
+            transition: background 0.2s, transform 0.2s;
+          }
+          .pro-header-logout-fixed:hover {
+            background-color: #5b21b6;
+            transform: scale(1.07);
+          }
+          @media (max-width: 600px) {
+            .pro-header-logout-fixed {
+              top: 12px;
+              right: 12px;
+              padding: 8px 18px;
+              font-size: 1rem;
+            }
+          }
+          .pro-header-card {
+            background: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 32px rgba(99,102,241,0.09);
+            padding: 2.2rem 2.5rem 1.5rem 2.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2.5rem;
+            max-width: 100%;
+          }
+          .pro-header-flex {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+          }
+          .pro-header-icon {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6366f1 60%, #a5b4fc 100%);
+            border-radius: 0.8rem;
+            padding: 0.7rem;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.13);
+          }
+          .pro-header-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 0.2rem;
+            letter-spacing: -1px;
+          }
+          .pro-header-desc {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+          }
+          @media (max-width: 900px) {
+            .pro-header-card {
+              flex-direction: column;
+              align-items: flex-start;
+              padding: 1.2rem 1rem 1.2rem 1rem;
+              gap: 1.2rem;
+            }
+            .pro-header-flex {
+              flex-direction: row;
+              gap: 0.7rem;
+            }
+            .pro-header-title {
+              font-size: 1.3rem;
+            }
+            .pro-header-desc {
+              font-size: 1rem;
+            }
+          }
+        `}</style>
+      </div>
+      <div className="modul-stack">
+        <div className="universal-card">
           <DersTakipKarti />
-          {/* Modern Mentor Görüşmeleri Kartı */}
+        </div>
+        <div className="universal-card">
+          <div className="universal-title">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path
+                d="M12 2a1 1 0 0 1 1 1v1.528A7.002 7.002 0 0 1 19 11a7 7 0 0 1-14 0 7.002 7.002 0 0 1 6-6.972V3a1 1 0 0 1 1-1z"
+                fill="#22c55e"
+              />
+            </svg>
+            Sınav / Quiz Alanı
+          </div>
+          <QuizAlani />
+        </div>
+        <div className="universal-card">
+          <OdevTeslimKarti />
+        </div>
+        <div className="universal-card">
+          <ProjeTeslimKarti />
+        </div>
+        <div className="universal-card">
           <MentorGorusmeKarti />
-          {/* Modern Puan & İlerleme Kartı */}
+        </div>
+        <div className="universal-card">
           <ProgressKarti />
         </div>
-        {/* Açılır Duyurular Alanı */}
-        {/* <DuyurularAccordion /> */}
-        <DuyurularGrid />
+        <div className="universal-card">
+          <DuyurularGrid />
+        </div>
       </div>
+      <style>{`
+        .modul-stack > .universal-card {
+          margin-bottom: 2.5rem;
+          max-width: 1200px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .modul-stack > .universal-card:last-child {
+          margin-bottom: 0;
+        }
+      `}</style>
     </div>
   );
 }
