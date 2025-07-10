@@ -6,7 +6,11 @@ const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 // app.use(express.json()); // KALDIRILDI
-app.use(cors());
+app.use(cors({
+    origin: "https://frovexis.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // Gmail SMTP ayarları (Google uygulama şifresi gereklidir)
 const transporter = nodemailer.createTransport({
