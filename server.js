@@ -7,7 +7,10 @@ const upload = multer({ dest: 'uploads/' });
 const app = express();
 // app.use(express.json()); // KALDIRILDI
 app.use(cors({
-    origin: "https://frovexis.vercel.app",
+    origin: [
+        "https://frovexis.vercel.app",
+        "http://localhost:5173"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -43,10 +46,10 @@ app.post('/api/contact', express.json(), async (req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.json({ success: true });
+        return res.status(200).json({ success: true });
     } catch (err) {
         console.error('Mail gönderilemedi:', err);
-        res.status(500).json({ success: false, error: 'Mail gönderilemedi.' });
+        return res.status(500).json({ success: false, error: 'Mail gönderilemedi.' });
     }
 });
 
@@ -68,10 +71,10 @@ app.post('/api/odev-gonder', upload.single('file'), async (req, res) => {
     };
     try {
         await transporter.sendMail(mailOptions);
-        res.json({ success: true });
+        return res.status(200).json({ success: true });
     } catch (err) {
         console.error('Ödev gönderilemedi:', err);
-        res.status(500).json({ success: false, error: 'Ödev gönderilemedi.' });
+        return res.status(500).json({ success: false, error: 'Ödev gönderilemedi.' });
     }
 });
 
@@ -93,10 +96,10 @@ app.post('/api/proje-gonder', upload.single('file'), async (req, res) => {
     };
     try {
         await transporter.sendMail(mailOptions);
-        res.json({ success: true });
+        return res.status(200).json({ success: true });
     } catch (err) {
         console.error('Proje gönderilemedi:', err);
-        res.status(500).json({ success: false, error: 'Proje gönderilemedi.' });
+        return res.status(500).json({ success: false, error: 'Proje gönderilemedi.' });
     }
 });
 

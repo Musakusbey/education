@@ -36,6 +36,7 @@ const programs = [
     desc: "Sıfırdan yazılıma başlayanlar için temel HTML, CSS ve JavaScript odaklı, uygulamalı ve mentör destekli bir eğitim.",
     oldPrice: "₺9.600",
     newPrice: "₺6.750",
+    shopier: "https://www.shopier.com/37479752", // Gerçek link
     details: [
       "1. Ay: Web'e Giriş ve HTML5\n- Bilgisayarın ve internetin temelleri\n- Web nedir? HTTP, URL, tarayıcıların çalışma yapısı\n- HTML5 ile semantik etiketler (header, nav, section, article, footer)\n- Form elemanları, link, görsel, tablo, liste yapıları\n- Mini alıştırmalar ve HTML template oluşturma",
       "2. Ay: CSS3 ve Modern Tasarım\n- CSS seçiciler, renkler, yazı tipleri, margin/padding\n- Box model, display, position sistemleri\n- Flexbox ve Grid ile responsive layout'lar oluşturma\n- Media queries ile mobil uyumlu siteler\n- İlk tam sayfa: Mobil öncelikli tasarım projesi",
@@ -52,6 +53,7 @@ const programs = [
     desc: "Temel bilgisi olanlar için React, Node.js, MongoDB ve gerçekçi projeler odaklı ileri seviye uygulamalı eğitim.",
     oldPrice: "₺12.000",
     newPrice: "₺9.600",
+    shopier: "https://www.shopier.com/37479822", // Gerçek link
     details: [
       "1. Ay: React'e Giriş ve Bileşen Yapısı\n- React kurulumu, proje yapısı ve JSX kullanımı\n- Component mantığı: fonksiyonel bileşenler, props ve state\n- useState ve temel event handling\n- React Developer Tools ile debug pratiği",
       "2. Ay: React Router ve Proje Mimarisi\n- react-router-dom ile çoklu sayfa yapısı (SPA)\n- Sayfa geçişleri, dinamik parametreler, 404 sayfası\n- Dosya yapısında component, page, layout ayrımı\n- Form yönetimi ve basit validasyon (yönlendirme sonrası mesajlar)",
@@ -70,6 +72,7 @@ const programs = [
     desc: "Kariyer hedefleyenler için ileri düzey full-stack eğitim, büyük proje geliştirme, CV & mülakat desteği ve referans mektubu.",
     oldPrice: "₺17.000",
     newPrice: "₺14.400",
+    shopier: "https://www.shopier.com/37479939", // Gerçek link
     details: [
       "1. Ay: İleri React – Uygulama Mimarisi\n- Proje klasör yapısının ileri düzey planlanması (atomic design, modular yapılar)\n- Context API ile global state yönetimi\n- useReducer, custom hook'lar yazma\n- Performans optimizasyonları: React.memo, lazy loading, code splitting",
       "2. Ay: Redux Toolkit ile Global State Yönetimi\n- Redux mantığı: store, reducer, actions\n- Redux Toolkit kurulumu, createSlice kullanımı\n- Asenkron veri çekimi (createAsyncThunk)\n- DevTools entegrasyonu ve middleware kullanımı",
@@ -116,7 +119,16 @@ export default function Programs() {
         </h2>
         <div className="programs-grid">
           {programs.map((p, i) => (
-            <div className="program-card" key={i}>
+            <div
+              className="program-card"
+              key={i}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+              }}
+            >
               <div>
                 <div className="program-header">
                   <span className="program-icon">{p.icon}</span>
@@ -146,9 +158,51 @@ export default function Programs() {
                   ))}
                 </ul>
               </div>
-              <button className="program-btn" onClick={() => handleToggle(i)}>
-                Detaylar
-              </button>
+              <div
+                style={{
+                  marginTop: "auto",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 8,
+                  width: "100%",
+                }}
+              >
+                <button
+                  className="program-btn"
+                  style={{ flex: 1, marginTop: 0, width: "auto" }}
+                  onClick={() => handleToggle(i)}
+                >
+                  Detaylar
+                </button>
+                <a
+                  href={p.shopier}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: 1,
+                    background: "#43a047",
+                    color: "#fff",
+                    borderRadius: 8,
+                    fontWeight: 600,
+                    padding: "10px 24px",
+                    fontSize: 16,
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseOver={e =>
+                    (e.currentTarget.style.background = "#388e3c")
+                  }
+                  onMouseOut={e =>
+                    (e.currentTarget.style.background = "#43a047")
+                  }
+                >
+                  Satın Al
+                </a>
+              </div>
               {open[i] && (
                 <div className="program-details">
                   {p.details.map((d, k) => {

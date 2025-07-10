@@ -64,6 +64,12 @@ const programs = [
   },
 ];
 
+const shopierLinks = [
+  "https://www.shopier.com/37479752",
+  "https://www.shopier.com/37479822",
+  "https://www.shopier.com/37479939",
+];
+
 const advantages = [
   "%100 Online ve Esnek Eğitim",
   "Birebir Mentorluk ve Destek",
@@ -123,8 +129,8 @@ const advantageIcons = [
   "👨‍🏫", // Mentorluk
   "🛠️", // Proje
   "🎓", // Staj
-  "📜", // Sertifika
-  "��", // Topluluk
+  "��", // Sertifika
+  "👥", // Topluluk
 ];
 
 export default function Home() {
@@ -182,7 +188,16 @@ export default function Home() {
         </h2>
         <div className="programs-grid">
           {programs.map((p, i) => (
-            <div className="program-card" key={i}>
+            <div
+              className="program-card"
+              key={i}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+              }}
+            >
               <div>
                 <div className="program-header">
                   <span className="program-icon">{["💡", "🧑‍💻", "🚀"][i]}</span>
@@ -212,9 +227,51 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-              <button className="program-btn" onClick={() => handleToggle(i)}>
-                Detaylar
-              </button>
+              <div
+                style={{
+                  marginTop: "auto",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 8,
+                  width: "100%",
+                }}
+              >
+                <button
+                  className="program-btn"
+                  style={{ flex: 1, marginTop: 0, width: "auto" }}
+                  onClick={() => handleToggle(i)}
+                >
+                  Detaylar
+                </button>
+                <a
+                  href={shopierLinks[i]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: 1,
+                    background: "#43a047",
+                    color: "#fff",
+                    borderRadius: 8,
+                    fontWeight: 600,
+                    padding: "10px 24px",
+                    fontSize: 16,
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseOver={e =>
+                    (e.currentTarget.style.background = "#388e3c")
+                  }
+                  onMouseOut={e =>
+                    (e.currentTarget.style.background = "#43a047")
+                  }
+                >
+                  Satın Al
+                </a>
+              </div>
               {open[i] && (
                 <div className="program-details">
                   {p.details.map((d, k) => {
