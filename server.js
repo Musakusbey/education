@@ -5,7 +5,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 const app = express();
-app.use(express.json());
+// app.use(express.json()); // KALDIRILDI
 app.use(cors());
 
 // Gmail SMTP ayarları (Google uygulama şifresi gereklidir)
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', express.json(), async (req, res) => {
     console.log("Gelen veri:", req.body);
     const { ad, soyad, email, telefon, alan } = req.body;
 
