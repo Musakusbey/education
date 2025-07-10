@@ -2,7 +2,7 @@ import OdevTeslim from "./OdevTeslim";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import QuizAlani from "../components/QuizAlani";
-import ProgressKarti from "../components/ProgressKarti";
+import ProgressKarti from "../components/ProgressKarti.jsx";
 import React, { useState, useEffect } from "react";
 
 // Kampüs paneline özel stiller
