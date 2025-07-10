@@ -181,8 +181,17 @@ function OdevTeslimKarti() {
           <div className="odev-form-group">
             <input
               type="file"
+              id="file-upload-odev"
+              className="custom-file-input"
               onChange={e => setSelectedFile(e.target.files[0])}
+              style={{ display: "none" }}
             />
+            <label htmlFor="file-upload-odev" className="file-upload-label">
+              <span className="file-upload-icon">📎</span> Dosya Seç
+            </label>
+            <span className="file-upload-filename">
+              {selectedFile ? selectedFile.name : "Dosya seçilmedi"}
+            </span>
             <button className="odev-form-btn" type="submit">
               Gönder
             </button>
@@ -316,6 +325,39 @@ function OdevTeslimKarti() {
           margin-bottom: 0.7rem;
           margin-top: 0.2rem;
           display: inline-block;
+        }
+      `}</style>
+      <style>{`
+        .file-upload-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: linear-gradient(90deg, #6366f1 60%, #7c3aed 100%);
+          color: #fff;
+          font-weight: 600;
+          padding: 10px 22px;
+          border-radius: 0.7rem;
+          cursor: pointer;
+          font-size: 1.08rem;
+          transition: background 0.2s, transform 0.2s;
+          margin-right: 1rem;
+          margin-bottom: 0.5rem;
+          border: none;
+          box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+        }
+        .file-upload-label:hover {
+          background: linear-gradient(90deg, #4f46e5 60%, #7c3aed 100%);
+          transform: scale(1.04);
+        }
+        .file-upload-icon {
+          font-size: 1.3rem;
+          margin-right: 0.2rem;
+        }
+        .file-upload-filename {
+          color: #374151;
+          font-size: 0.98rem;
+          font-style: italic;
+          margin-left: 0.2rem;
         }
       `}</style>
     </div>
@@ -421,8 +463,17 @@ function ProjeTeslimKarti() {
           <div className="odev-form-group">
             <input
               type="file"
+              id="file-upload-proje"
+              className="custom-file-input"
               onChange={e => setSelectedFile(e.target.files[0])}
+              style={{ display: "none" }}
             />
+            <label htmlFor="file-upload-proje" className="file-upload-label">
+              <span className="file-upload-icon">📎</span> Dosya Seç
+            </label>
+            <span className="file-upload-filename">
+              {selectedFile ? selectedFile.name : "Dosya seçilmedi"}
+            </span>
             <button className="odev-form-btn" type="submit">
               Gönder
             </button>
@@ -556,6 +607,39 @@ function ProjeTeslimKarti() {
           margin-bottom: 0.7rem;
           margin-top: 0.2rem;
           display: inline-block;
+        }
+      `}</style>
+      <style>{`
+        .file-upload-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: linear-gradient(90deg, #6366f1 60%, #7c3aed 100%);
+          color: #fff;
+          font-weight: 600;
+          padding: 10px 22px;
+          border-radius: 0.7rem;
+          cursor: pointer;
+          font-size: 1.08rem;
+          transition: background 0.2s, transform 0.2s;
+          margin-right: 1rem;
+          margin-bottom: 0.5rem;
+          border: none;
+          box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+        }
+        .file-upload-label:hover {
+          background: linear-gradient(90deg, #4f46e5 60%, #7c3aed 100%);
+          transform: scale(1.04);
+        }
+        .file-upload-icon {
+          font-size: 1.3rem;
+          margin-right: 0.2rem;
+        }
+        .file-upload-filename {
+          color: #374151;
+          font-size: 0.98rem;
+          font-style: italic;
+          margin-left: 0.2rem;
         }
       `}</style>
     </div>
@@ -1301,15 +1385,6 @@ export default function Kampus() {
           <DersTakipKarti />
         </div>
         <div className="universal-card">
-          <div className="universal-title">
-            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path
-                d="M12 2a1 1 0 0 1 1 1v1.528A7.002 7.002 0 0 1 19 11a7 7 0 0 1-14 0 7.002 7.002 0 0 1 6-6.972V3a1 1 0 0 1 1-1z"
-                fill="#22c55e"
-              />
-            </svg>
-            Sınav / Quiz Alanı
-          </div>
           <QuizAlani />
         </div>
         <div className="universal-card">
