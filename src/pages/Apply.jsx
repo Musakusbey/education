@@ -148,18 +148,20 @@ export default function Apply() {
     setError("");
     try {
       const API_URL = import.meta.env.VITE_API_URL;
-      const apiUrl = `${API_URL}/api/contact`;
-      const res = await fetch(apiUrl, {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
+      if (response.ok) {
         setSubmitted(true);
       } else {
-        setError("Bir hata oluştu, lütfen tekrar deneyin.");
+        const data = await response.json();
+        setError(data.error || "Bir hata oluştu, lütfen tekrar deneyin.");
       }
-    } catch {
+    } catch (err) {
       setError("Bağlantı hatası, lütfen tekrar deneyin.");
     }
     setLoading(false);

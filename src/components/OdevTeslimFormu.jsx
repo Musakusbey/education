@@ -14,7 +14,7 @@ function OdevTeslimFormu() {
     formData.append("dosya", dosya);
 
     const API_URL = import.meta.env.VITE_API_URL;
-    await fetch(`${API_URL}/api/odev`, {
+    await fetch(`${API_URL}/api/odev-gonder`, {
       method: "POST",
       body: formData,
     });

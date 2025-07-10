@@ -20,7 +20,7 @@ export default function OdevTeslim() {
     formData.append("dosya", dosya);
     const API_URL = import.meta.env.VITE_API_URL;
     try {
-      await fetch(`${API_URL}/api/odev`, {
+      await fetch(`${API_URL}/api/odev-gonder`, {
         method: "POST",
         body: formData,
       });
