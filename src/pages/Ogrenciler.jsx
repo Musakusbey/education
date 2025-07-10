@@ -1,8 +1,9 @@
 import OdevTeslim from "./OdevTeslim";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import QuizAlani from "../components/QuizAlani";
+import ProgressKarti from "../components/ProgressKarti";
+import React, { useState, useEffect } from "react";
 
 // Kampüs paneline özel stiller
 const panelCss = `
@@ -503,7 +504,7 @@ function MentorGorusmeFormu({ onClose }) {
       setLoading(false);
       return;
     }
-    const { data, error } = await supabase.from("mentor_meetings").insert([
+    const { error } = await supabase.from("mentor_meetings").insert([
       {
         user_id,
         mentor_name: mentorName,
@@ -605,43 +606,128 @@ function MentorGorusmeFormu({ onClose }) {
   );
 }
 
-function PuanIlerlemeKarti() {
+// --- DuyuruBanner: Baştan Modern ve Sorunsuz ---
+function DuyuruBanner() {
+  const [visible, setVisible] = React.useState(true);
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
   return (
-    <div className="card">
-      <h3 className="card-title">
-        <span role="img" aria-label="puan">
-          📊
-        </span>{" "}
-        Puan & İlerleme
-      </h3>
-      <p className="card-subtext">
-        Bu ayki aktiflik: <strong>%80</strong>
-        <br />
-        Toplam teslim: <strong>5 ödev</strong>, <strong>2 proje</strong>
-      </p>
+    <div className="duyuru-banner">
+      <span className="duyuru-icon" role="img" aria-label="duyuru">
+        📢
+      </span>
+      <span className="duyuru-text">
+        <b>Yeni duyuru:</b> 12 Temmuz Proje teslimi için son gün! &nbsp;|&nbsp;
+        15 Temmuz Mentor görüşmeleri başlıyor. &nbsp;|&nbsp; Haftalık quizler
+        yakında aktif olacak.
+      </span>
+      <button className="duyuru-close" onClick={handleClose}>
+        Kapat ✕
+      </button>
+      <style>{`
+        .duyuru-banner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1.2rem;
+          background: linear-gradient(90deg, #fef9c3 60%, #fde68a 100%);
+          color: #92400e;
+          border-radius: 1.2rem;
+          box-shadow: 0 4px 24px rgba(251,191,36,0.13);
+          font-size: 1.13rem;
+          font-weight: 600;
+          padding: 1.1rem 2.2rem;
+          margin: 0 auto 2rem auto;
+          max-width: 900px;
+          position: relative;
+        }
+        .duyuru-icon {
+          font-size: 1.5rem;
+          margin-right: 0.5rem;
+        }
+        .duyuru-text {
+          flex: 1;
+        }
+        .duyuru-close {
+          background: none;
+          border: none;
+          color: #92400e;
+          font-weight: 700;
+          font-size: 1.1rem;
+          margin-left: 1.2rem;
+          cursor: pointer;
+          border-radius: 0.5rem;
+          padding: 0.2rem 0.7rem;
+          transition: background 0.18s;
+        }
+        .duyuru-close:hover {
+          background: #fde68a;
+        }
+        @media (max-width: 600px) {
+          .duyuru-banner {
+            flex-direction: column;
+            font-size: 1rem;
+            padding: 1rem 0.7rem;
+            gap: 0.7rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }
 
-function DuyuruKarti() {
+// Açılır duyurular alanı
+function DuyurularAccordion() {
   return (
-    <div className="card">
-      <h3 className="card-title">
+    <details
+      style={{
+        background: "#fff",
+        borderRadius: "1rem",
+        boxShadow: "0 4px 24px rgba(30,60,120,0.10)",
+        padding: "2rem 2.5rem 1.5rem 2.5rem",
+        margin: "2rem auto 0 auto",
+        maxWidth: 900,
+        fontSize: "1.1rem",
+      }}
+      open
+    >
+      <summary
+        style={{
+          fontWeight: 800,
+          fontSize: "1.3rem",
+          color: "#1e293b",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+        }}
+      >
         <span role="img" aria-label="duyuru">
           📢
         </span>{" "}
         Duyurular & Bildirimler
-      </h3>
-      <ul className="announcement-list">
+      </summary>
+      <ul
+        style={{
+          marginTop: 18,
+          marginLeft: 0,
+          paddingLeft: 18,
+          color: "#374151",
+        }}
+      >
         <li>
-          <strong>12 Temmuz:</strong> Proje teslimi için son gün!
+          <b>12 Temmuz:</b> Proje teslimi için son gün!
         </li>
         <li>
-          <strong>15 Temmuz:</strong> Mentor görüşmeleri başlıyor.
+          <b>15 Temmuz:</b> Mentor görüşmeleri başlıyor.
         </li>
         <li>Haftalık quizler yakında aktif olacak.</li>
       </ul>
-    </div>
+    </details>
   );
 }
 
@@ -657,6 +743,7 @@ export default function Kampus() {
   };
   return (
     <div className="kampus-panel-root min-h-screen bg-gray-100 py-10 px-4">
+      <DuyuruBanner />
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Üst header ve başlık */}
         <div className="header-container">
@@ -687,10 +774,10 @@ export default function Kampus() {
           {/* Modern Mentor Görüşmeleri Kartı */}
           <MentorGorusmeKarti />
           {/* Modern Puan & İlerleme Kartı */}
-          <PuanIlerlemeKarti />
-          {/* Modern Duyurular & Bildirimler Kartı */}
-          <DuyuruKarti />
+          <ProgressKarti />
         </div>
+        {/* Açılır Duyurular Alanı */}
+        <DuyurularAccordion />
       </div>
     </div>
   );
